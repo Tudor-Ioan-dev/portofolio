@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miadent · Cabinet Stomatologic Iași</title>
+  <meta name="description" content="Cabinet stomatologic Miadent în Iași. Dr. Oleg Cucoș — implanturi, coroane, proteze. Rating 4.9★. Programează-te online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:   #ffffff;
+      --bg:      #f0f6ff;
+      --blue:    #1d5cd4;
+      --blue-dk: #1446b0;
+      --blue-lt: #eff6ff;
+      --blue-bd: #bfdbfe;
+      --teal:    #0891b2;
+      --text:    #0f172a;
+      --mid:     #64748b;
+      --light:   #94a3b8;
+      --border:  #e2e8f0;
+      --font:    'Plus Jakarta Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: var(--font); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: rgba(255,255,255,0.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-icon {
+      width: 36px; height: 36px; background: var(--blue); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 17px; font-weight: 800; font-style: italic;
+    }
+    .nav-name { font-size: 17px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .nav-name span { color: var(--blue); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      padding: 0.55rem 1.3rem; background: var(--blue); color: white;
+      font-size: 14px; font-weight: 700; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--blue-dk); transform: translateY(-1px); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; padding: 6rem 3rem 4rem;
+      display: grid; grid-template-columns: 1fr 480px; gap: 5rem; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700; color: var(--blue);
+      background: var(--blue-lt); border: 1px solid var(--blue-bd);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.5s 0.1s forwards;
+    }
+    .hero-tag .dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: pulse 2s infinite; }
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.2rem;
+      opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    }
+    .hero-title .blue { color: var(--blue); }
+    .hero-desc {
+      font-size: 16px; color: var(--mid); line-height: 1.75; margin-bottom: 2rem; max-width: 460px;
+      opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+    }
+    .btn-blue {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 0.8rem 1.6rem; background: var(--blue); color: white;
+      font-size: 15px; font-weight: 700; border-radius: 9px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 14px rgba(29,92,212,0.3);
+    }
+    .btn-blue:hover { background: var(--blue-dk); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 0.8rem 1.6rem; border: 1.5px solid var(--border); color: var(--mid);
+      font-size: 15px; font-weight: 600; border-radius: 9px; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+    .hero-trust {
+      display: flex; gap: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--border);
+      opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+    }
+    .trust-item .trust-num { font-size: 22px; font-weight: 800; color: var(--blue); line-height: 1; }
+    .trust-item .trust-label { font-size: 12px; color: var(--light); margin-top: 2px; }
+
+    /* CHAIR SVG CARD */
+    .hero-visual {
+      display: flex; flex-direction: column; gap: 1rem;
+      opacity: 0; animation: fadeIn 0.8s 0.4s forwards;
+    }
+    .chair-card {
+      background: var(--bg); border: 1px solid var(--blue-bd);
+      border-radius: 20px; padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      position: relative; overflow: hidden;
+    }
+    .chair-card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 150px; height: 150px;
+      background: radial-gradient(circle, rgba(29,92,212,0.08), transparent 70%);
+      border-radius: 50%;
+    }
+    .chair-title { font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* DENTAL CHAIR SVG */
+    .chair-svg-wrap { position: relative; }
+    .chair-svg-wrap svg { width: 220px; height: auto; display: block; }
+    .chair-glow {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 180px; height: 20px;
+      background: radial-gradient(ellipse, rgba(29,92,212,0.2), transparent 70%);
+      border-radius: 50%;
+    }
+    .chair-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.6rem 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .chair-badge-icon { font-size: 18px; }
+    .chair-badge-text { font-size: 13px; font-weight: 700; color: var(--text); }
+    .chair-badge-sub { font-size: 11px; color: var(--light); }
+
+    /* MINI STATS ROW */
+    .mini-stats {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .mini-stat {
+      background: white; padding: 1rem; text-align: center;
+      transition: background 0.2s;
+    }
+    .mini-stat:hover { background: var(--blue-lt); }
+    .mini-stat-num { font-size: 20px; font-weight: 800; color: var(--blue); letter-spacing: -0.02em; }
+    .mini-stat-label { font-size: 11px; color: var(--light); margin-top: 2px; }
+
+    /* BAND */
+    .band {
+      background: var(--blue); padding: 1rem 3rem;
+      display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    }
+    .band-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85);
+    }
+    .band-item::before { content: '✓'; font-weight: 800; color: #93c5fd; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .sec-bg { background: var(--bg); }
+    .sec-dark { background: var(--text); }
+    .sec-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+    .sec-eyebrow-white { color: #60a5fa; }
+    .sec-title { font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.8rem; }
+    .sec-title-white { color: white; }
+    .sec-sub { font-size: 15px; color: var(--mid); max-width: 500px; line-height: 1.75; margin-bottom: 2.5rem; }
+    .sec-sub-white { color: #94a3b8; }
+
+    /* SERVICII */
+    .servicii-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .serviciu {
+      background: white; border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.8rem; cursor: default;
+      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .serviciu::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(29,92,212,0.04), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .serviciu:hover { box-shadow: 0 12px 40px rgba(29,92,212,0.12); transform: translateY(-5px); border-color: var(--blue-bd); }
+    .serviciu:hover::after { opacity: 1; }
+    .serviciu-icon { font-size: 28px; margin-bottom: 1rem; display: block; }
+    .serviciu-name { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .serviciu-desc { font-size: 13px; color: var(--mid); line-height: 1.65; margin-bottom: 1.2rem; }
+    .serviciu-price { font-size: 13px; font-weight: 700; color: var(--blue); }
+
+    /* CALCULATOR */
+    .calculator-wrap {
+      display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start;
+    }
+    .calc-options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .calc-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.2rem; background: white; border: 2px solid var(--border);
+      border-radius: 10px; cursor: pointer; transition: all 0.2s; user-select: none;
+    }
+    .calc-option:hover { border-color: var(--blue-bd); background: var(--blue-lt); }
+    .calc-option.selected { border-color: var(--blue); background: var(--blue-lt); }
+    .calc-option-left { display: flex; align-items: center; gap: 10px; }
+    .calc-checkbox {
+      width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s; font-size: 11px; color: white;
+    }
+    .calc-option.selected .calc-checkbox { background: var(--blue); border-color: var(--blue); }
+    .calc-option.selected .calc-checkbox::after { content: '✓'; }
+    .calc-label { font-size: 14px; font-weight: 600; color: var(--text); }
+    .calc-label-sub { font-size: 12px; color: var(--mid); }
+    .calc-price-tag { font-size: 14px; font-weight: 700; color: var(--blue); white-space: nowrap; }
+
+    .calc-result {
+      background: white; border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.8rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); position: sticky; top: 80px;
+    }
+    .calc-result-title { font-size: 14px; font-weight: 700; color: var(--mid); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .calc-items { min-height: 80px; margin-bottom: 1.2rem; }
+    .calc-item-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+      font-size: 13px; color: var(--mid);
+    }
+    .calc-item-row span:last-child { font-weight: 600; color: var(--text); }
+    .calc-empty { font-size: 13px; color: var(--light); font-style: italic; }
+    .calc-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 1rem; border-top: 2px solid var(--border);
+    }
+    .calc-total-label { font-size: 14px; font-weight: 700; color: var(--mid); }
+    .calc-total-num { font-size: 28px; font-weight: 800; color: var(--blue); letter-spacing: -0.02em; }
+    .calc-note { font-size: 11px; color: var(--light); margin-top: 0.5rem; text-align: center; }
+    .calc-cta {
+      display: block; text-align: center; padding: 0.8rem; background: var(--blue);
+      color: white; font-size: 14px; font-weight: 700; border-radius: 8px;
+      text-decoration: none; margin-top: 1.2rem; transition: background 0.2s;
+    }
+    .calc-cta:hover { background: var(--blue-dk); }
+
+    /* RECENZII */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .review {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 1.8rem; transition: background 0.2s, transform 0.2s;
+    }
+    .review:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+    .review-stars { color: #fbbf24; letter-spacing: 2px; font-size: 14px; margin-bottom: 1rem; }
+    .review-text { font-size: 15px; font-style: italic; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 1.2rem; }
+    .review-author { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* DOCTOR */
+    .doctor-card {
+      display: grid; grid-template-columns: 260px 1fr; gap: 0;
+      background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .doctor-img {
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px; color: var(--light); min-height: 300px;
+    }
+    .doctor-img span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .doctor-info { padding: 2.5rem; }
+    .doctor-tag { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .doctor-name { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .doctor-bio { font-size: 14px; color: var(--mid); line-height: 1.8; margin-bottom: 1.5rem; }
+    .doctor-specs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .spec { padding: 4px 12px; background: var(--blue-lt); border: 1px solid var(--blue-bd); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--blue); }
+
+    /* PROGRAMARE */
+    .prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .prog-info-list { display: flex; flex-direction: column; }
+    .prog-info-row {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .prog-info-icon { font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+    .prog-info-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light); margin-bottom: 2px; }
+    .prog-info-val { font-size: 14px; color: var(--text); font-weight: 500; }
+
+    .prog-form-card {
+      background: white; border: 1px solid var(--border); border-radius: 16px;
+      padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .prog-form-title { font-size: 20px; font-weight: 800; margin-bottom: 0.3rem; }
+    .prog-form-sub { font-size: 13px; color: var(--mid); margin-bottom: 1.5rem; }
+    .fg { margin-bottom: 0.9rem; }
+    .fg label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--mid); margin-bottom: 5px; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 0.72rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: var(--font); font-size: 14px; color: var(--text); background: white;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,92,212,0.1);
+    }
+    .fg textarea { min-height: 80px; resize: vertical; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-submit {
+      width: 100%; padding: 0.9rem; background: var(--blue); color: white;
+      border: none; border-radius: 9px; font-family: var(--font); font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 0.25rem;
+      box-shadow: 0 4px 14px rgba(29,92,212,0.25);
+    }
+    .form-submit:hover { background: var(--blue-dk); transform: translateY(-1px); }
+    .form-success {
+      display: none; padding: 1rem; background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; color: #166534; font-size: 14px; font-weight: 500;
+      text-align: center; margin-top: 0.75rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0f172a; padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { font-size: 16px; font-weight: 800; color: #334155; }
+    .footer-logo span { color: var(--blue); }
+    .footer-copy { font-size: 12px; color: #334155; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .chair-svg-wrap { animation: float 4s ease-in-out infinite; }
+
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      height: 3px; width: 0%;
+      background: linear-gradient(90deg, #1d5cd4, #60a5fa);
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(29,92,212,0.5);
+    }
+
+    /* ── SPLIT TEXT ── */
+    .split-word {
+      display: inline-block;
+      overflow: hidden;
+    }
+    .split-word-inner {
+      display: inline-block;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
+    }
+    .split-word-inner.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── SCALE REVEAL ── */
+    .reveal-scale {
+      opacity: 0;
+      transform: translateY(30px) scale(0.97);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ── PARALLAX HERO ── */
+    .hero-visual { will-change: transform; }
+
+    /* ── SLIDE FROM LEFT/RIGHT ── */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── NUMBER COUNT UP ── */
+    .count-up { display: inline-block; }
+
+    /* ── SMOOTH HOVER TILT on cards ── */
+    .serviciu { transform-style: preserve-3d; }
+
+    @media (max-width: 960px) {
+      #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .servicii-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .calculator-wrap { grid-template-columns: 1fr; }
+      .doctor-card { grid-template-columns: 1fr; }
+      .doctor-img { min-height: 200px; }
+      .prog-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .sec { padding: 4rem 1.25rem; }
+      .servicii-grid { grid-template-columns: 1fr; }
+      .fg-row { grid-template-columns: 1fr; }
+      .band { gap: 1.5rem; padding: 1rem 1.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-icon">M</div>
+    <span class="nav-name">Mia<span>dent</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicii">Servicii</a></li>
+    <li><a href="#calculator">Prețuri</a></li>
+    <li><a href="#echipa">Echipă</a></li>
+    <li><a href="#programare">Programare</a></li>
+  </ul>
+  <a href="#programare" class="nav-cta">Programează-te</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-tag"><span class="dot"></span> Deschis · Str. Ion Creangă 17, Iași</div>
+    <h1 class="hero-title split-title">
+      Zâmbetul tău merită<br>
+      <span class="blue">cei mai buni</span><br>
+      mâini din Iași.
+    </h1>
+    <p class="hero-desc">Cabinetul Miadent oferă tratamente stomatologice complete — de la detartraj la implanturi — cu prețuri accesibile și o echipă recunoscută pentru răbdare și profesionalism.</p>
+    <div class="hero-actions">
+      <a href="#programare" class="btn-blue">🗓 Fă o programare</a>
+      <a href="#servicii" class="btn-ghost">Vezi serviciile →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="trust-num"><span class="count-up" data-target="4.9" data-suffix="★">0</span></div>
+        <div class="trust-label">Google Reviews</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num"><span class="count-up" data-target="97" data-suffix="+">0</span></div>
+        <div class="trust-label">Recenzii verificate</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num"><span class="count-up" data-target="10" data-suffix="+">0</span></div>
+        <div class="trust-label">Ani experiență</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="chair-card">
+      <div class="chair-svg-wrap">
+        <svg viewBox="0 0 340 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="seatG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3b7ef8"/>
+              <stop offset="100%" stop-color="#1446b0"/>
+            </linearGradient>
+            <linearGradient id="backG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2563eb"/>
+              <stop offset="100%" stop-color="#1446b0"/>
+            </linearGradient>
+            <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e2e8f0"/>
+              <stop offset="100%" stop-color="#94a3b8"/>
+            </linearGradient>
+            <linearGradient id="lampG" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#fef3c7"/>
+              <stop offset="100%" stop-color="#fde68a"/>
+            </linearGradient>
+            <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(29,92,212,0.16)"/>
+            </filter>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Floor shadow -->
+          <ellipse cx="170" cy="386" rx="105" ry="11" fill="rgba(29,92,212,0.07)"/>
+
+          <!-- BASE COLUMN -->
+          <rect x="156" y="308" width="28" height="76" rx="14" fill="url(#metalG)"/>
+          <rect x="161" y="308" width="7" height="76" rx="3.5" fill="rgba(255,255,255,0.38)"/>
+          <!-- Base disc layers -->
+          <ellipse cx="170" cy="382" rx="58" ry="10" fill="#cbd5e1"/>
+          <ellipse cx="170" cy="379" rx="56" ry="8" fill="#dde4ef"/>
+          <ellipse cx="170" cy="377" rx="46" ry="6" fill="#eef2f8"/>
+
+          <!-- SEAT -->
+          <g filter="url(#sh)">
+            <path d="M68 300 Q66 314 88 316 L262 316 Q282 314 282 300 L282 283 Q282 270 262 268 L88 268 Q68 268 68 283 Z" fill="#1446b0"/>
+            <path d="M70 283 Q70 270 88 267 L262 267 Q280 267 280 282 L280 299 Q280 310 260 312 L88 312 Q70 310 70 299 Z" fill="url(#seatG)"/>
+            <path d="M92 270 L258 270 Q276 270 277 281 L277 287 Q252 280 92 280 Q74 280 72 287 L72 280 Q72 270 92 270 Z" fill="rgba(255,255,255,0.16)"/>
+            <path d="M92 294 L260 294" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="7,5"/>
+          </g>
+
+          <!-- BACKREST -->
+          <g filter="url(#sh)">
+            <path d="M66 148 Q63 134 78 126 L164 126 Q178 126 175 140 L178 268 L64 268 Z" fill="url(#backG)"/>
+            <path d="M80 130 L160 130 Q172 130 171 142 L172 170 Q142 163 82 165 Q68 165 67 155 Z" fill="rgba(255,255,255,0.11)"/>
+            <path d="M70 200 L172 200" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="6,5"/>
+            <path d="M70 234 L172 234" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="5,6"/>
+          </g>
+
+          <!-- HEADREST -->
+          <g filter="url(#sh)">
+            <path d="M80 86 Q78 74 92 70 L154 70 Q166 70 164 82 L166 126 L78 126 Z" fill="#1d5cd4"/>
+            <path d="M94 73 L150 73 Q162 73 161 83 L162 105 Q134 100 92 102 Q82 102 81 92 Z" fill="rgba(255,255,255,0.12)"/>
+          </g>
+          <rect x="87" y="77" width="70" height="17" rx="8.5" fill="#1446b0"/>
+          <rect x="92" y="79" width="60" height="7" rx="3.5" fill="rgba(255,255,255,0.1)"/>
+
+          <!-- FOOTREST -->
+          <g filter="url(#sh)">
+            <path d="M240 283 L282 283 L282 308 L240 308 Q228 306 228 295 Q228 285 240 283 Z" fill="url(#seatG)"/>
+            <path d="M242 285 L280 285 L280 292 Q260 288 242 290 Z" fill="rgba(255,255,255,0.12)"/>
+          </g>
+
+          <!-- LEFT ARMREST -->
+          <g filter="url(#sh)">
+            <rect x="18" y="220" width="16" height="50" rx="8" fill="#94a3b8"/>
+            <rect x="21" y="220" width="5" height="50" rx="2.5" fill="rgba(255,255,255,0.3)"/>
+            <path d="M26 232 Q24 222 36 220 L68 220 L70 268 L28 268 Q22 260 24 246 Z" fill="url(#metalG)"/>
+          </g>
+
+          <!-- RIGHT ARMREST -->
+          <g filter="url(#sh)">
+            <rect x="246" y="220" width="16" height="50" rx="8" fill="#94a3b8"/>
+            <rect x="249" y="220" width="5" height="50" rx="2.5" fill="rgba(255,255,255,0.3)"/>
+            <path d="M178 220 L244 220 Q256 222 256 236 L256 268 L175 268 Z" fill="url(#metalG)"/>
+          </g>
+
+          <!-- LAMP ARM -->
+          <path d="M164 126 Q180 96 218 80 Q248 68 268 50" stroke="#94a3b8" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M164 126 Q180 96 218 80 Q248 68 268 50" stroke="rgba(255,255,255,0.28)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+          <!-- LAMP HEAD -->
+          <g filter="url(#glow)">
+            <ellipse cx="280" cy="44" rx="42" ry="24" fill="#64748b"/>
+            <ellipse cx="280" cy="42" rx="38" ry="20" fill="url(#lampG)"/>
+            <ellipse cx="280" cy="40" rx="28" ry="13" fill="#fffbeb"/>
+            <circle cx="268" cy="40" r="7" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="281" cy="38" r="5.5" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="293" cy="41" r="4.5" fill="rgba(255,255,255,0.35)"/>
+            <!-- Glow beam -->
+            <path d="M252 64 Q280 78 308 64" stroke="rgba(254,243,199,0.35)" stroke-width="14" stroke-linecap="round" fill="none"/>
+          </g>
+
+          <!-- TRAY ARM -->
+          <path d="M256 250 L308 236" stroke="#94a3b8" stroke-width="6" stroke-linecap="round"/>
+          <path d="M256 250 L308 236" stroke="rgba(255,255,255,0.22)" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- INSTRUMENT TRAY -->
+          <g filter="url(#sh)">
+            <rect x="298" y="210" width="38" height="30" rx="8" fill="#dde4ef"/>
+            <rect x="301" y="213" width="32" height="24" rx="5" fill="#f8fafc"/>
+            <rect x="306" y="217" width="3.5" height="14" rx="1.75" fill="#94a3b8"/>
+            <rect x="313" y="215" width="3" height="16" rx="1.5" fill="#c8d4e4"/>
+            <rect x="320" y="218" width="3.5" height="12" rx="1.75" fill="#3b7ef8"/>
+            <rect x="327" y="216" width="2.5" height="15" rx="1.25" fill="#94a3b8"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="mini-stats">
+      <div class="mini-stat">
+        <div class="mini-stat-num">4.9★</div>
+        <div class="mini-stat-label">Rating</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-stat-num">97+</div>
+        <div class="mini-stat-label">Recenzii</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-stat-num">10+</div>
+        <div class="mini-stat-label">Ani</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-item">Implanturi dentare</div>
+  <div class="band-item">Coroane de porțelan</div>
+  <div class="band-item">Proteze dentare</div>
+  <div class="band-item">Tratamente de canal</div>
+  <div class="band-item">Albire profesională</div>
+  <div class="band-item">Pedodonție</div>
+</div>
+
+<!-- SERVICII -->
+<div id="servicii">
+  <div class="sec">
+    <p class="sec-eyebrow reveal">Servicii</p>
+    <h2 class="sec-title reveal">Tot ce ai nevoie,<br>într-un singur loc.</h2>
+    <p class="sec-sub reveal">De la control de rutină la tratamente complexe — echipa Miadent are soluția potrivită pentru tine.</p>
+    <div class="servicii-grid">
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">🦷</span>
+        <div class="serviciu-name">Implanturi Dentare</div>
+        <p class="serviciu-desc">Soluția permanentă pentru dinții lipsă. Titan de calitate, integrare naturală, durabilitate pe termen lung.</p>
+        <div class="serviciu-price">La consultație</div>
+      </div>
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">👑</span>
+        <div class="serviciu-name">Coroane de Porțelan</div>
+        <p class="serviciu-desc">Restaurări estetice identice cu dinții naturali. Aspect perfect, funcționalitate deplină.</p>
+        <div class="serviciu-price">La consultație</div>
+      </div>
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">😊</span>
+        <div class="serviciu-name">Proteze Dentare</div>
+        <p class="serviciu-desc">Proteze fixe și mobile personalizate, confortabile și estetice, adaptate perfect.</p>
+        <div class="serviciu-price">La consultație</div>
+      </div>
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">🔬</span>
+        <div class="serviciu-name">Tratament de Canal</div>
+        <p class="serviciu-desc">Endodonție modernă, fără durere, pentru salvarea dinților afectați de carie profundă.</p>
+        <div class="serviciu-price">De la 350 lei</div>
+      </div>
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">✨</span>
+        <div class="serviciu-name">Albire Dentară</div>
+        <p class="serviciu-desc">Albire profesională la cabinet — câteva nuanțe mai luminos, în condiții sigure, rezultate imediate.</p>
+        <div class="serviciu-price">De la 400 lei</div>
+      </div>
+      <div class="serviciu reveal reveal-scale">
+        <span class="serviciu-icon">🛡️</span>
+        <div class="serviciu-name">Detartraj & Igienă</div>
+        <p class="serviciu-desc">Curățare profesională cu ultrasunete, esențială pentru sănătatea gingiilor și prevenirea cariilor.</p>
+        <div class="serviciu-price">De la 120 lei</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<div class="sec-bg" id="calculator">
+  <div class="sec">
+    <p class="sec-eyebrow reveal">Calculator prețuri</p>
+    <h2 class="sec-title reveal">Estimează costul<br>tratamentului tău.</h2>
+    <p class="sec-sub reveal">Selectează serviciile de care ai nevoie și află orientativ cât ar costa. Prețul final se stabilește la consultație.</p>
+    <div class="calculator-wrap reveal">
+      <div class="calc-options" id="calcOptions">
+        <div class="calc-option" data-name="Consultație inițială" data-price="80" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Consultație inițială</div>
+              <div class="calc-label-sub">Evaluare completă + radiografie</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">80 lei</div>
+        </div>
+        <div class="calc-option" data-name="Detartraj" data-price="120" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Detartraj & Igienă profesională</div>
+              <div class="calc-label-sub">Curățare completă cu ultrasunete</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">120 lei</div>
+        </div>
+        <div class="calc-option" data-name="Plombă" data-price="180" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Plombă (obturație)</div>
+              <div class="calc-label-sub">Material compozit de calitate</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">180 lei</div>
+        </div>
+        <div class="calc-option" data-name="Tratament de canal" data-price="350" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Tratament de canal</div>
+              <div class="calc-label-sub">Endodonție modernă, fără durere</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">350 lei</div>
+        </div>
+        <div class="calc-option" data-name="Albire dentară" data-price="400" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Albire dentară profesională</div>
+              <div class="calc-label-sub">Rezultate vizibile din prima ședință</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">400 lei</div>
+        </div>
+        <div class="calc-option" data-name="Coroană de porțelan" data-price="900" onclick="toggleCalc(this)">
+          <div class="calc-option-left">
+            <div class="calc-checkbox"></div>
+            <div>
+              <div class="calc-label">Coroană de porțelan</div>
+              <div class="calc-label-sub">Estetică și funcționalitate pe termen lung</div>
+            </div>
+          </div>
+          <div class="calc-price-tag">900 lei</div>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <div class="calc-result-title">Estimare cost</div>
+        <div class="calc-items" id="calcItems">
+          <div class="calc-empty" id="calcEmpty">Selectează serviciile din stânga →</div>
+        </div>
+        <div class="calc-total">
+          <div class="calc-total-label">Total estimat</div>
+          <div class="calc-total-num" id="calcTotal">0 lei</div>
+        </div>
+        <div class="calc-note">* Prețul final se stabilește la consultație</div>
+        <a href="#programare" class="calc-cta">Programează consultația →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECENZII -->
+<div class="sec-dark">
+  <div class="sec">
+    <p class="sec-eyebrow sec-eyebrow-white reveal">Recenzii pacienți</p>
+    <h2 class="sec-title sec-title-white reveal">4.9★ din 97 de recenzii.<br>Oamenii vorbesc.</h2>
+    <p class="sec-sub sec-sub-white reveal">Pacienții Miadent revin de ani de zile — pentru că se simt în mâini bune de la prima vizită.</p>
+    <div class="reviews-grid reveal">
+      <div class="review">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Servicii de calitate, profesionalism, răbdare multă și o atmosferă primitoare. Recomand cu mare drag!"</p>
+        <div class="review-author">— Alexandra B.</div>
+      </div>
+      <div class="review">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Singurul cabinet stomatologic unde voi reveni chiar dacă nu aș mai locui în Iași. Echipă excepțională."</p>
+        <div class="review-author">— H. Mihaela</div>
+      </div>
+      <div class="review">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Merg de 6 ani la Miadent și de fiecare dată am fost mulțumită. Profesioniști, prețuri rezonabile, servicii calitative."</p>
+        <div class="review-author">— Alina C.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ECHIPA -->
+<div id="echipa">
+  <div class="sec">
+    <p class="sec-eyebrow reveal">Echipa noastră</p>
+    <h2 class="sec-title reveal">Medicul tău de încredere.</h2>
+    <div class="doctor-card reveal">
+      <div class="doctor-img reveal-right">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Foto Dr. Cucoș</span>
+      </div>
+      <div class="doctor-info reveal-left">
+        <div class="doctor-tag">Medic Stomatolog Primar</div>
+        <div class="doctor-name">Dr. Oleg Cucoș</div>
+        <p class="doctor-bio">Fondatorul cabinetului Miadent, Dr. Oleg Cucoș practică stomatologia de peste un deceniu în Iași. Recunoscut pentru empatie și răbdare, explică fiecare etapă a tratamentului și se asigură că pacientul se simte în siguranță pe tot parcursul vizitei — inclusiv cei mai anxioși pacienți sau copiii.</p>
+        <div class="doctor-specs">
+          <span class="spec">Implantologie</span>
+          <span class="spec">Protetică dentară</span>
+          <span class="spec">Endodonție</span>
+          <span class="spec">Estetică dentară</span>
+          <span class="spec">Pedodonție</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMARE -->
+<div class="sec-bg" id="programare">
+  <div class="sec">
+    <p class="sec-eyebrow reveal">Programare online</p>
+    <h2 class="sec-title reveal">Fă o programare acum.<br>Simplu și rapid.</h2>
+    <div class="prog-grid">
+      <div class="reveal">
+        <div class="prog-info-list">
+          <div class="prog-info-row">
+            <div class="prog-info-icon">📍</div>
+            <div>
+              <div class="prog-info-label">Adresă</div>
+              <div class="prog-info-val">Str. Ion Creangă 17, bl. U2, parter<br><span style="font-size:13px;color:var(--mid)">vis-a-vis de Spitalul de Neurochirurgie</span></div>
+            </div>
+          </div>
+          <div class="prog-info-row">
+            <div class="prog-info-icon">🕐</div>
+            <div>
+              <div class="prog-info-label">Program</div>
+              <div class="prog-info-val">Luni–Vineri: 09:00–19:00<br>Sâmbătă: 09:00–14:00</div>
+            </div>
+          </div>
+          <div class="prog-info-row">
+            <div class="prog-info-icon">📞</div>
+            <div>
+              <div class="prog-info-label">Telefon</div>
+              <div class="prog-info-val">07XX XXX XXX</div>
+            </div>
+          </div>
+          <div class="prog-info-row">
+            <div class="prog-info-icon">🚋</div>
+            <div>
+              <div class="prog-info-label">Transport</div>
+              <div class="prog-info-val">Capătul tramvaiului 11</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="prog-form-card">
+          <div class="prog-form-title">Cerere de programare</div>
+          <div class="prog-form-sub">Completează mai jos — te contactăm pentru confirmare.</div>
+          <div class="fg-row">
+            <div class="fg"><label>Nume</label><input type="text" placeholder="Numele tău" id="p-nume"/></div>
+            <div class="fg"><label>Telefon</label><input type="tel" placeholder="07XX XXX XXX" id="p-tel"/></div>
+          </div>
+          <div class="fg">
+            <label>Serviciu dorit</label>
+            <select id="p-serviciu">
+              <option value="">Alege serviciul...</option>
+              <option>Consultație / Control</option>
+              <option>Implant dentar</option>
+              <option>Coroană de porțelan</option>
+              <option>Proteză dentară</option>
+              <option>Tratament de canal</option>
+              <option>Albire dentară</option>
+              <option>Detartraj & Igienă</option>
+              <option>Altul</option>
+            </select>
+          </div>
+          <div class="fg"><label>Mesaj (opțional)</label><textarea placeholder="Descrieți pe scurt problema sau preferințele dvs..." id="p-msg"></textarea></div>
+          <button class="form-submit" onclick="submitProg()">Trimite cererea →</button>
+          <div class="form-success" id="prog-success">✓ Cererea a fost trimisă! Vă contactăm în cel mai scurt timp.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Mia<span>dent</span> · Cabinet Stomatologic Iași</div>
+  <div class="footer-copy">© 2025 Miadent · Toate drepturile rezervate</div>
+</footer>
+
+<script>
+  /* ── 1. PROGRESS BAR ── */
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+  });
+
+  /* ── 2. SCROLL REVEAL (standard) ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── 3. SCALE REVEAL ── */
+  const scaleObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 110);
+        scaleObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal-scale').forEach(el => scaleObs.observe(el));
+
+  /* ── 4. SLIDE LEFT / RIGHT ── */
+  const slideObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        slideObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => slideObs.observe(el));
+
+  /* ── 5. SPLIT TEXT ANIMATION ── */
+  function splitTitle(el) {
+    const html = el.innerHTML;
+    const lines = html.split(/<br\s*\/?>/i);
+    el.innerHTML = '';
+    lines.forEach((line, li) => {
+      const words = line.trim().split(' ').filter(w => w.length > 0);
+      words.forEach(word => {
+        const wrap = document.createElement('span');
+        wrap.className = 'split-word';
+        const inner = document.createElement('span');
+        inner.className = 'split-word-inner';
+        inner.textContent = word;
+        wrap.appendChild(inner);
+        el.appendChild(wrap);
+        el.appendChild(document.createTextNode(' '));
+      });
+      if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+    });
+  }
+
+  const splitTitles = document.querySelectorAll('.split-title');
+  splitTitles.forEach(el => splitTitle(el));
+
+  const splitObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const inners = e.target.querySelectorAll('.split-word-inner');
+        inners.forEach((inner, i) => {
+          setTimeout(() => inner.classList.add('visible'), i * 80);
+        });
+        splitObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  splitTitles.forEach(el => splitObs.observe(el));
+
+  /* ── 6. COUNT UP NUMBERS ── */
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = el.dataset.target.includes('.');
+    const duration = 1800;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(target, increment * step);
+      const eased = target * (1 - Math.pow(1 - step/steps, 3));
+      current = Math.min(target, eased);
+      el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+      if (step >= steps) clearInterval(timer);
+    }, duration / steps);
+  }
+
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target);
+        countObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count-up').forEach(el => countObs.observe(el));
+
+  /* ── 7. PARALLAX on hero visual ── */
+  const heroVisual = document.querySelector('.hero-visual');
+  if (heroVisual) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY < window.innerHeight * 1.2) {
+        heroVisual.style.transform = `translateY(${scrollY * 0.12}px)`;
+      }
+    }, { passive: true });
+  }
+
+  /* ── 8. 3D TILT on service cards ── */
+  document.querySelectorAll('.serviciu').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-5px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s, border-color 0.3s';
+    });
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s ease, box-shadow 0.3s, border-color 0.3s';
+    });
+  });
+
+  /* ── 9. SMOOTH SECTION TRANSITIONS on nav links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── CALCULATOR ── */
+  let selected = {};
+  function toggleCalc(el) {
+    const name = el.dataset.name;
+    const price = parseInt(el.dataset.price);
+    if (selected[name]) {
+      delete selected[name];
+      el.classList.remove('selected');
+    } else {
+      selected[name] = price;
+      el.classList.add('selected');
+    }
+    renderCalc();
+  }
+  function renderCalc() {
+    const items = document.getElementById('calcItems');
+    const total = document.getElementById('calcTotal');
+    const keys = Object.keys(selected);
+    if (keys.length === 0) {
+      items.innerHTML = '<div class="calc-empty">Selectează serviciile din stânga →</div>';
+      total.textContent = '0 lei';
+      return;
+    }
+    let sum = 0;
+    items.innerHTML = keys.map(k => {
+      sum += selected[k];
+      return `<div class="calc-item-row"><span>${k}</span><span>${selected[k]} lei</span></div>`;
+    }).join('');
+    // Animate total
+    const oldVal = parseInt(total.textContent) || 0;
+    let step = 0; const steps = 20;
+    const interval = setInterval(() => {
+      step++;
+      const val = Math.round(oldVal + (sum - oldVal) * (step/steps));
+      total.textContent = val + ' lei';
+      if (step >= steps) clearInterval(interval);
+    }, 16);
+  }
+
+  /* ── FORM ── */
+  function submitProg() {
+    const nume = document.getElementById('p-nume').value.trim();
+    const tel = document.getElementById('p-tel').value.trim();
+    const svc = document.getElementById('p-serviciu').value;
+    if (!nume || !tel || !svc) { alert('Vă rugăm completați numele, telefonul și serviciul dorit.'); return; }
+    document.getElementById('prog-success').style.display = 'block';
+    const btn = document.querySelector('.form-submit');
+    btn.disabled = true; btn.style.opacity = '0.5'; btn.textContent = 'Trimis ✓';
+  }
+</script>
+</body>
+</html>
