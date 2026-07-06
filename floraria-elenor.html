@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florăria Elenor — Iași | Buchete & Aranjamente Florale</title>
+<meta name="description" content="Florăria Elenor Iași — buchete premium, aranjamente pentru nunți și evenimente, livrare flori în Iași. Descoperă florile din spatele fiecărui buchet.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fdfaf7;
+    --blush:#f7e8ec;
+    --rose:#c26d84;
+    --rose-deep:#a14e66;
+    --green:#3d5245;
+    --ink:#2b2b30;
+    --gold:#b99668;
+    --serif:'Cormorant Garamond',serif;
+    --sans:'Jost',sans-serif;
+    --script:'Pinyon Script',cursive;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.35em;font-size:.72rem;color:var(--rose-deep);font-weight:500}
+  .section-title{font-size:clamp(2rem,4.5vw,3.2rem);margin:.4em 0 .5em;color:var(--green)}
+  section{padding:96px 0}
+
+  /* ── Header ── */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s,box-shadow .4s;padding:18px 0}
+  header.scrolled{background:rgba(253,250,247,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,.06);padding:10px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--script);font-size:2rem;color:var(--rose-deep)}
+  .logo small{font-family:var(--sans);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--green);display:block;margin-top:-6px}
+  nav ul{display:flex;gap:34px;list-style:none}
+  nav a{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;position:relative}
+  nav a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--rose);transition:width .3s}
+  nav a:hover::after{width:100%}
+  .nav-cta{background:var(--green);color:#fff;padding:10px 22px;border-radius:100px;font-size:.78rem}
+  .nav-cta:hover{background:var(--rose-deep)}
+  .nav-cta::after{display:none}
+  .burger{display:none;background:none;border:none;font-size:1.6rem;color:var(--green);cursor:pointer}
+
+  /* ── Hero ── */
+  .hero{min-height:100svh;display:flex;align-items:center;background:
+    radial-gradient(60% 80% at 80% 10%,rgba(247,232,236,.9),transparent 60%),
+    radial-gradient(50% 60% at 10% 90%,rgba(215,228,219,.6),transparent 60%),var(--cream);
+    padding:140px 0 60px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);color:var(--green)}
+  .hero h1 em{font-style:italic;color:var(--rose-deep)}
+  .hero p.lead{font-size:1.08rem;font-weight:300;max-width:46ch;margin:22px 0 34px;color:#555}
+  .btn{display:inline-block;padding:15px 34px;border-radius:100px;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:.3s}
+  .btn-primary{background:var(--rose-deep);color:#fff}
+  .btn-primary:hover{background:var(--green);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--green);color:var(--green);margin-left:12px}
+  .btn-ghost:hover{background:var(--green);color:#fff}
+  .hero-img{position:relative}
+  .hero-img img{border-radius:300px 300px 24px 24px;box-shadow:0 40px 80px -30px rgba(162,78,102,.35);aspect-ratio:3/4;object-fit:cover;object-position:center 20%}
+  .hero-badge{position:absolute;bottom:26px;left:-30px;background:#fff;border-radius:18px;padding:14px 22px;box-shadow:0 16px 40px rgba(0,0,0,.12);font-size:.85rem}
+  .hero-badge b{font-family:var(--serif);font-size:1.3rem;color:var(--rose-deep);display:block}
+  .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:#999;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .scroll-hint::after{content:'';width:1px;height:36px;background:linear-gradient(var(--rose),transparent);animation:drip 1.6s infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ── Scroll-scrub decompose ── */
+  #atelier{padding:0}
+  .scrub{height:520vh;position:relative}
+  .scrub-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--cream)}
+  .stage-card{position:absolute;left:50%;top:19svh;transform:translateX(-50%);
+    height:74svh;aspect-ratio:912/1024;max-width:92vw;
+    border-radius:26px;overflow:hidden;background:#fff;
+    box-shadow:0 40px 90px -35px rgba(80,60,70,.45)}
+  .stage-card canvas{position:absolute;inset:0;width:100%;height:100%}
+  .scrub-title{position:absolute;top:4.5svh;left:0;right:0;text-align:center;pointer-events:none;padding:0 24px}
+  .scrub-title .eyebrow{display:block;margin-bottom:8px}
+  .scrub-title h2{font-size:clamp(1.5rem,3.2vw,2.4rem);color:var(--green)}
+  .scrub-title h2 span{display:inline-block;transition:opacity .5s,transform .5s}
+  .scrub-title .t-b{position:absolute;left:0;right:0;top:100%;margin-top:-1.15em}
+  .hidden-t{opacity:0;transform:translateY(14px)}
+  .callout{position:absolute;pointer-events:none;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease;max-width:190px}
+  .callout.on{opacity:1;transform:none}
+  .callout .dot{width:9px;height:9px;border-radius:50%;background:var(--rose-deep);box-shadow:0 0 0 5px rgba(194,109,132,.25);display:inline-block;margin-bottom:6px}
+  .callout h4{font-family:var(--serif);font-size:1.25rem;color:var(--green);font-weight:600}
+  .callout p{font-size:.74rem;color:#777;line-height:1.45}
+  .scrub-progress{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:180px;height:2px;background:rgba(0,0,0,.09);border-radius:2px}
+  .scrub-progress i{display:block;height:100%;width:0;background:var(--rose-deep);border-radius:2px}
+
+  /* ── Flori / ingrediente ── */
+  .ingredients{background:linear-gradient(var(--blush),var(--cream))}
+  .ing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:44px}
+  .ing-card{background:#fff;border-radius:20px;padding:30px 26px;box-shadow:0 12px 34px -18px rgba(162,78,102,.25);transition:transform .3s}
+  .ing-card:hover{transform:translateY(-6px)}
+  .ing-card .emoji{font-size:1.9rem}
+  .ing-card h3{font-size:1.4rem;color:var(--rose-deep);margin:10px 0 6px}
+  .ing-card p{font-size:.9rem;color:#666}
+
+  /* ── Servicii ── */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:44px}
+  .svc{border:1px solid #eadfe3;border-radius:22px;padding:36px 30px;background:#fff;position:relative;overflow:hidden;transition:.35s}
+  .svc:hover{border-color:var(--rose);box-shadow:0 24px 50px -24px rgba(162,78,102,.35)}
+  .svc .num{font-family:var(--serif);font-size:2.6rem;color:var(--blush);position:absolute;top:14px;right:22px;font-style:italic}
+  .svc h3{font-size:1.5rem;color:var(--green);margin-bottom:10px}
+  .svc p{font-size:.92rem;color:#666}
+  .svc .price{margin-top:16px;font-family:var(--serif);font-size:1.25rem;color:var(--rose-deep);font-weight:600}
+
+  /* ── Prețuri ── */
+  .prices{background:var(--green);color:#f2ede7}
+  .prices .section-title{color:#fff}
+  .prices .eyebrow{color:#e8c9d3}
+  .price-table{margin-top:40px;border-top:1px solid rgba(255,255,255,.18)}
+  .price-row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:20px 6px;border-bottom:1px solid rgba(255,255,255,.18);transition:background .3s}
+  .price-row:hover{background:rgba(255,255,255,.05)}
+  .price-row h4{font-family:var(--serif);font-size:1.35rem;font-weight:500}
+  .price-row small{display:block;font-size:.8rem;color:#c9d4cc;font-family:var(--sans)}
+  .price-row .p{font-family:var(--serif);font-size:1.3rem;color:#f0d9e0;white-space:nowrap}
+  .prices .note{margin-top:22px;font-size:.78rem;color:#b9c6bd}
+
+  /* ── Proces ── */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;margin-top:48px;counter-reset:step}
+  .step{position:relative;padding-top:16px}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--serif);font-style:italic;font-size:3rem;color:var(--blush);position:absolute;top:-18px;left:0;-webkit-text-stroke:1px var(--rose)}
+  .step h3{font-size:1.3rem;color:var(--green);margin:26px 0 8px}
+  .step p{font-size:.9rem;color:#666}
+
+  /* ── Contact ── */
+  .contact{background:linear-gradient(180deg,var(--cream),var(--blush))}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+  .contact-info h3{font-size:1.5rem;color:var(--green);margin-bottom:16px}
+  .c-line{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;font-size:.95rem}
+  .c-line .ico{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 20px -10px rgba(162,78,102,.4);flex-shrink:0}
+  form{background:#fff;border-radius:24px;padding:36px;box-shadow:0 30px 60px -30px rgba(162,78,102,.35)}
+  form label{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;font-weight:500;color:var(--green)}
+  form input,form textarea{width:100%;border:1px solid #e6dade;border-radius:12px;padding:13px 16px;margin:8px 0 20px;font-family:var(--sans);font-size:.95rem;background:var(--cream)}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--rose)}
+  form button{width:100%;border:none;cursor:pointer;font-family:var(--sans)}
+
+  footer{background:var(--ink);color:#bbb;padding:48px 0;font-size:.85rem}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot .logo{color:var(--blush)}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .hero-grid,.contact-grid{grid-template-columns:1fr}
+    .hero-img{max-width:420px;margin:0 auto}
+    nav ul{position:fixed;inset:0;background:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform .35s}
+    nav ul.open{transform:none}
+    nav a{font-size:1.1rem}
+    .burger{display:block;z-index:60}
+    section{padding:70px 0}
+  }
+  @media(max-width:700px){
+    .scrub-title{top:11svh}
+    .stage-card{top:20svh;height:56svh}
+    .callout{left:50%!important;right:auto!important;top:auto!important;bottom:7svh;
+      transform:translate(-50%,12px);text-align:center!important;max-width:82vw;
+      background:rgba(253,250,247,.94);padding:10px 20px;border-radius:16px;
+      box-shadow:0 12px 30px -14px rgba(80,60,70,.35)}
+    .callout.on{transform:translate(-50%,0)}
+    .callout .dot{display:none}
+    .scrub-progress{bottom:2.5svh}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="logo" href="#top">Elenor<small>Florărie · Iași</small></a>
+    <nav>
+      <button class="burger" id="burger" aria-label="Meniu">☰</button>
+      <ul id="menu">
+        <li><a href="#atelier">Atelier</a></li>
+        <li><a href="#flori">Florile</a></li>
+        <li><a href="#servicii">Servicii</a></li>
+        <li><a href="#preturi">Prețuri</a></li>
+        <li><a href="#contact" class="nav-cta">Comandă</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Florărie artizanală în inima Iașului</span>
+      <h1>Fiecare buchet spune <em>o poveste</em>.</h1>
+      <p class="lead">La Florăria Elenor, fiecare aranjament este compus manual, floare cu floare, din cele mai proaspete bujori, trandafiri și hortensii. Derulează și privește cum se naște un buchet.</p>
+      <a href="#contact" class="btn btn-primary">Comandă flori</a>
+      <a href="#atelier" class="btn btn-ghost">Vezi atelierul</a>
+    </div>
+    <div class="hero-img">
+      <img src="assets/frames/f_001.jpg" alt="Buchet Elenor cu bujori, trandafiri și hortensie">
+      <div class="hero-badge"><b>Livrare în Iași</b>în aceeași zi, 7 zile / 7</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Derulează</div>
+</section>
+
+<!-- ═══ SCRUB / DECOMPOSE ═══ -->
+<section id="atelier">
+  <div class="scrub" id="scrub">
+    <div class="scrub-stage">
+      <div class="stage-card"><canvas id="cv"></canvas></div>
+
+      <div class="scrub-title">
+        <span class="eyebrow">Anatomia unui buchet Elenor</span>
+        <h2 style="position:relative">
+          <span class="t-a" id="titleA">Un buchet. O compoziție.</span>
+          <span class="t-b hidden-t" id="titleB">Fiecare floare, aleasă cu grijă.</span>
+        </h2>
+      </div>
+
+      <div class="callout" data-at=".42" style="top:18%;left:6%">
+        <span class="dot"></span><h4>Trandafiri roz</h4>
+        <p>Trandafiri de seră, tăiați în dimineața livrării.</p>
+      </div>
+      <div class="callout" data-at=".50" style="top:14%;right:6%;text-align:right">
+        <span class="dot"></span><h4>Bujori</h4>
+        <p>Vedeta buchetelor noastre de sezon — parfum intens.</p>
+      </div>
+      <div class="callout" data-at=".58" style="top:42%;right:4%;text-align:right">
+        <span class="dot"></span><h4>Hortensie</h4>
+        <p>Volum și textură, în nuanțe pastelate.</p>
+      </div>
+      <div class="callout" data-at=".66" style="top:40%;left:4%">
+        <span class="dot"></span><h4>Trandafiri albi & lisianthus</h4>
+        <p>Accente delicate de alb-crem.</p>
+      </div>
+      <div class="callout" data-at=".74" style="top:66%;left:7%">
+        <span class="dot"></span><h4>Eucalipt & waxflower</h4>
+        <p>Verdeață aromată și flori mărunte de umplere.</p>
+      </div>
+      <div class="callout" data-at=".82" style="top:72%;right:7%;text-align:right">
+        <span class="dot"></span><h4>Panglică de satin</h4>
+        <p>Finisaj manual, legat în atelierul nostru.</p>
+      </div>
+
+      <div class="scrub-progress"><i id="bar"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FLORILE ═══ -->
+<section class="ingredients" id="flori">
+  <div class="wrap">
+    <span class="eyebrow reveal">Materia primă</span>
+    <h2 class="section-title reveal">Florile & materialele noastre</h2>
+    <p class="reveal" style="max-width:60ch;color:#666">Lucrăm doar cu flori proaspete, aduse săptămânal de la cultivatori locali și licitațiile din Olanda. Acestea sunt ingredientele buchetului pe care tocmai l-ai văzut descompus.</p>
+    <div class="ing-grid">
+      <div class="ing-card reveal"><span class="emoji">🌸</span><h3>Bujori</h3><p>Flori de sezon (mai–iulie), cu petale bogate și parfum inconfundabil. Simbolul romantismului.</p></div>
+      <div class="ing-card reveal"><span class="emoji">🌹</span><h3>Trandafiri</h3><p>Roz pudrat, alb-crem sau somon — tulpini lungi, boboc mare, prospețime garantată 7 zile.</p></div>
+      <div class="ing-card reveal"><span class="emoji">💮</span><h3>Hortensie</h3><p>Inflorescențe generoase care dau volum și aer romantic oricărui aranjament.</p></div>
+      <div class="ing-card reveal"><span class="emoji">🤍</span><h3>Lisianthus</h3><p>Delicat ca un trandafir sălbatic, rezistent în vază — preferatul buchetelor de mireasă.</p></div>
+      <div class="ing-card reveal"><span class="emoji">🌿</span><h3>Eucalipt & verdeață</h3><p>Eucalipt cinerea, limonium și waxflower — textura și aroma semnăturii Elenor.</p></div>
+      <div class="ing-card reveal"><span class="emoji">🎀</span><h3>Ambalaje & panglici</h3><p>Hârtie coreeană mată, satin și mătase, în paleta pastel a casei. Legare 100% manuală.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICII ═══ -->
+<section id="servicii">
+  <div class="wrap">
+    <span class="eyebrow reveal">Ce facem</span>
+    <h2 class="section-title reveal">Serviciile noastre</h2>
+    <div class="services-grid">
+      <div class="svc reveal"><span class="num">01</span><h3>Buchete la comandă</h3><p>Buchete personalizate pentru orice ocazie — zile de naștere, aniversări, cereri în căsătorie sau „doar pentru că".</p><span class="price">de la 120 lei</span></div>
+      <div class="svc reveal"><span class="num">02</span><h3>Aranjamente în cutie</h3><p>Compoziții în cutii rotunde de catifea sau coșuri naturale, cu burete floral — nu necesită vază.</p><span class="price">de la 180 lei</span></div>
+      <div class="svc reveal"><span class="num">03</span><h3>Nunți & botezuri</h3><p>Concept floral complet: buchet de mireasă, lumânări, arcadă de ceremonie, aranjamente de masă și candelabre.</p><span class="price">de la 2.500 lei</span></div>
+      <div class="svc reveal"><span class="num">04</span><h3>Evenimente corporate</h3><p>Decor floral pentru lansări, conferințe și recepții, plus abonamente săptămânale pentru birouri și restaurante.</p><span class="price">de la 300 lei/lună</span></div>
+      <div class="svc reveal"><span class="num">05</span><h3>Livrare în Iași</h3><p>Livrăm în aceeași zi oriunde în Iași și în împrejurimi, cu mesaj personalizat scris de mână.</p><span class="price">gratuit peste 200 lei</span></div>
+      <div class="svc reveal"><span class="num">06</span><h3>Ateliere florale</h3><p>Workshopuri de aranjare pentru începători și team-building-uri creative, în atelierul nostru.</p><span class="price">de la 150 lei/pers</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PREȚURI ═══ -->
+<section class="prices" id="preturi">
+  <div class="wrap">
+    <span class="eyebrow reveal">Transparență</span>
+    <h2 class="section-title reveal">Listă de prețuri</h2>
+    <div class="price-table reveal">
+      <div class="price-row"><div><h4>Buchet clasic trandafiri (11 fire)</h4><small>trandafiri premium + verdeață + ambalaj</small></div><span class="p">120 – 180 lei</span></div>
+      <div class="price-row"><div><h4>Buchet semnătură Elenor</h4><small>bujori, hortensie, trandafiri, lisianthus, eucalipt — ca în video</small></div><span class="p">250 – 380 lei</span></div>
+      <div class="price-row"><div><h4>Aranjament în cutie de catifea</h4><small>Ø 20–30 cm, flori mixte de sezon</small></div><span class="p">180 – 320 lei</span></div>
+      <div class="price-row"><div><h4>Buchet de mireasă</h4><small>consultanță + realizare + buchet de rezervă</small></div><span class="p">de la 350 lei</span></div>
+      <div class="price-row"><div><h4>Decor sală eveniment</h4><small>prezidiu, arcadă, 10 aranjamente de masă</small></div><span class="p">de la 2.500 lei</span></div>
+      <div class="price-row"><div><h4>Abonament flori birou / acasă</h4><small>livrare săptămânală, vaza inclusă la prima livrare</small></div><span class="p">de la 300 lei/lună</span></div>
+      <div class="price-row"><div><h4>Livrare standard Iași</h4><small>gratuită la comenzi de peste 200 lei</small></div><span class="p">15 lei</span></div>
+    </div>
+    <p class="note">* Prețurile sunt orientative și variază în funcție de sezon și de florile alese. Cere o ofertă exactă la telefon sau prin formularul de mai jos.</p>
+  </div>
+</section>
+
+<!-- ═══ PROCES ═══ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow reveal">Cum lucrăm</span>
+    <h2 class="section-title reveal">De la floare la buchet</h2>
+    <div class="steps">
+      <div class="step reveal"><h3>Selecția florilor</h3><p>Alegem în fiecare dimineață cele mai proaspete fire — exact tipurile pe care le-ai văzut în descompunerea de mai sus.</p></div>
+      <div class="step reveal"><h3>Condiționare</h3><p>Fiecare tulpină este curățată, tăiată în unghi și hidratată minimum 4 ore înainte de aranjare.</p></div>
+      <div class="step reveal"><h3>Compoziția</h3><p>Floristul construiește buchetul în spirală, echilibrând culori, texturi și înălțimi.</p></div>
+      <div class="step reveal"><h3>Finisaj & livrare</h3><p>Ambalaj premium, panglică de satin, card scris de mână și livrare cu grijă la ușa destinatarului.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow reveal">Hai să vorbim</span>
+    <h2 class="section-title reveal">Comandă & contact</h2>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Florăria Elenor, Iași</h3>
+        <div class="c-line"><span class="ico">📍</span><div><b>Adresă</b><br>Iași, România <em>(adresa exactă va fi completată)</em></div></div>
+        <div class="c-line"><span class="ico">📞</span><div><b>Telefon / WhatsApp</b><br><a href="tel:+40700000000">+40 7xx xxx xxx</a></div></div>
+        <div class="c-line"><span class="ico">🕐</span><div><b>Program</b><br>Luni – Sâmbătă: 09:00 – 20:00<br>Duminică: 10:00 – 16:00</div></div>
+        <div class="c-line"><span class="ico">💌</span><div><b>Social</b><br><a href="#">Instagram</a> · <a href="#">Facebook</a> · <a href="#">TikTok</a></div></div>
+      </div>
+      <form class="reveal" action="mailto:contact@florariaelenor.ro" method="post" enctype="text/plain">
+        <label for="nume">Nume</label>
+        <input id="nume" name="nume" type="text" placeholder="Numele tău" required>
+        <label for="tel">Telefon</label>
+        <input id="tel" name="telefon" type="tel" placeholder="+40 ..." required>
+        <label for="msg">Ce flori îți dorești?</label>
+        <textarea id="msg" name="mesaj" rows="4" placeholder="Ex: un buchet semnătură cu bujori, livrare vineri…" required></textarea>
+        <button class="btn btn-primary" type="submit">Trimite cererea</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span class="logo">Elenor</span>
+    <span>© 2026 Florăria Elenor, Iași. Făcut cu 🌸 pentru oamenii care dăruiesc flori.</span>
+  </div>
+</footer>
+
+<script>
+/* ── header ── */
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40),{passive:true});
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+/* ── reveal on scroll ── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ── scroll-scrub frame sequence ── */
+const FRAMES=61, PAD=n=>String(n).padStart(3,'0');
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const scrub=document.getElementById('scrub');
+const bar=document.getElementById('bar');
+const titleA=document.getElementById('titleA'),titleB=document.getElementById('titleB');
+const callouts=[...document.querySelectorAll('.callout')];
+const imgs=[];let loaded=0,current=-1;
+
+for(let i=1;i<=FRAMES;i++){
+  const im=new Image();
+  im.src=`assets/frames/f_${PAD(i)}.jpg`;
+  im.onload=()=>{if(++loaded===1)draw(0)};
+  imgs.push(im);
+}
+
+function resize(){
+  const dpr=Math.min(devicePixelRatio||1,2);
+  cv.width=cv.clientWidth*dpr;cv.height=cv.clientHeight*dpr;
+  if(current>=0)draw(current,true);
+}
+addEventListener('resize',resize);
+
+function draw(idx,force){
+  if(idx===current&&!force)return;
+  const im=imgs[idx];
+  if(!im||!im.complete||!im.naturalWidth)return;
+  current=idx;
+  const cw=cv.width,ch=cv.height,iw=im.naturalWidth,ih=im.naturalHeight;
+  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,cw,ch);
+  // "cover" fit — the card matches the video's aspect ratio, so cropping is minimal
+  const s=Math.max(cw/iw,ch/ih);
+  const w=iw*s,h=ih*s;
+  ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
+}
+
+let ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    ticking=false;
+    const r=scrub.getBoundingClientRect();
+    const total=r.height-innerHeight;
+    const p=Math.min(1,Math.max(0,-r.top/total));
+    draw(Math.min(FRAMES-1,Math.floor(p*FRAMES)));
+    bar.style.width=(p*100)+'%';
+    titleA.classList.toggle('hidden-t',p>=.18);
+    titleB.classList.toggle('hidden-t',p<.68);
+    if(innerWidth<=700){
+      // mobile: show only the most recent callout, as a bottom label
+      let lastIdx=-1;
+      callouts.forEach((c,i)=>{if(p>=parseFloat(c.dataset.at))lastIdx=i});
+      callouts.forEach((c,i)=>c.classList.toggle('on',i===lastIdx&&p<.97));
+    }else{
+      callouts.forEach(c=>c.classList.toggle('on',p>=parseFloat(c.dataset.at)&&p<.97));
+    }
+  });
+}
+addEventListener('scroll',onScroll,{passive:true});
+resize();onScroll();
+</script>
+</body>
+</html>
