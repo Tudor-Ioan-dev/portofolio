@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURO Restaurant · Bucătărie Grecească Iași</title>
+  <meta name="description" content="AURO Restaurant — bucătărie grecească autentică în Iași. Hummus, gyros, fructe de mare proaspete. Rating 4.9★. Rezervă o masă acum."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:     #0d0b07;
+      --surface: #141108;
+      --card:    #1c1810;
+      --gold:    #c9a84c;
+      --gold-lt: #e8c97a;
+      --gold-dk: #9a7a2e;
+      --text:    #f5f0e8;
+      --mid:     #a09080;
+      --muted:   #5a5040;
+      --border:  #2a2318;
+      --serif:   'Cormorant Garamond', serif;
+      --sans:    'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* ── PROGRESS BAR ── */
+    #pb { position: fixed; top: 0; left: 0; z-index: 9999; height: 2px; width: 0%; background: linear-gradient(90deg, var(--gold-dk), var(--gold), var(--gold-lt)); transition: width 0.08s linear; pointer-events: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled { background: rgba(13,11,7,0.96); border-color: var(--border); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { padding: 0.6rem 1.5rem; border: 1px solid var(--gold); color: var(--gold); font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Greek meander border top & bottom */
+    .hero-meander-top, .hero-meander-bottom {
+      position: absolute; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--gold-dk) 0px, var(--gold-dk) 8px, transparent 8px, transparent 12px, var(--gold-dk) 12px, var(--gold-dk) 16px, transparent 16px, transparent 24px);
+      opacity: 0.4;
+    }
+    .hero-meander-top { top: 64px; }
+    .hero-meander-bottom { bottom: 0; }
+
+    .hero-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300; line-height: 0.95; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--text);
+      opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+    }
+    .hero-title em { font-style: italic; font-weight: 300; color: var(--gold); display: block; font-size: 0.65em; letter-spacing: 0.12em; margin-top: 0.15em; }
+    .hero-divider {
+      width: 80px; height: 1px; background: var(--gold); margin: 2rem auto;
+      opacity: 0; animation: expandW 0.8s 0.7s forwards;
+      transform-origin: center;
+    }
+    .hero-desc {
+      font-size: 15px; color: var(--mid); line-height: 1.8; max-width: 500px;
+      opacity: 0; animation: fadeUp 0.7s 0.85s forwards; margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s 1s forwards;
+    }
+    .btn-gold {
+      display: inline-block; padding: 0.9rem 2.2rem;
+      background: var(--gold); color: var(--ink);
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.25); }
+    .btn-outline-gold {
+      display: inline-block; padding: 0.9rem 2.2rem;
+      border: 1px solid var(--muted); color: var(--mid);
+      font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .btn-outline-gold:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      opacity: 0; animation: fadeUp 0.7s 1.2s forwards;
+    }
+    .hstat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .hstat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION BASE ── */
+    .sec { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .sec-wrap { border-top: 1px solid var(--border); }
+    .sec-wrap-alt { background: var(--surface); border-top: 1px solid var(--border); }
+    .eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .sec-title { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 0.6rem; }
+    .sec-title em { font-style: italic; color: var(--gold); }
+    .sec-sub { font-size: 15px; color: var(--mid); max-width: 480px; line-height: 1.8; }
+
+    /* ── SPECIALTY STRIP ── */
+    .strip {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+      display: flex; gap: 0;
+      overflow-x: auto; overflow-y: hidden;
+      scrollbar-width: none; -ms-overflow-style: none;
+      cursor: grab;
+    }
+    .strip::-webkit-scrollbar { display: none; }
+    .strip:active { cursor: grabbing; }
+    .strip-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 2.5rem; border-right: 1px solid var(--border);
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid);
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── MENU ── */
+    .menu-tabs {
+      display: flex; gap: 0; margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border); overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .menu-tabs::-webkit-scrollbar { display: none; }
+    .menu-tab {
+      padding: 1rem 1.8rem; font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all 0.25s; white-space: nowrap;
+      background: none; border-top: none; border-left: none; border-right: none;
+      font-family: var(--sans);
+    }
+    .menu-tab:hover { color: var(--text); }
+    .menu-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .menu-category { display: none; }
+    .menu-category.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; animation: fadeIn 0.45s ease; }
+
+    .menu-card {
+      background: var(--card); border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      cursor: default; overflow: hidden;
+    }
+    .menu-card:hover { border-color: var(--gold-dk); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .menu-card-img {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1c1810, #241e10);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px; color: var(--muted);
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      position: relative; overflow: hidden;
+    }
+    .menu-card-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(13,11,7,0.8) 100%);
+    }
+    .menu-card-img-icon { font-size: 28px; opacity: 0.35; }
+    .menu-card-body { padding: 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .menu-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.5rem; }
+    .menu-card-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--text); line-height: 1.2; }
+    .menu-card-price {
+      font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--gold);
+      white-space: nowrap; padding-top: 3px;
+    }
+    .menu-card-desc { font-size: 12px; color: var(--muted); line-height: 1.65; flex: 1; }
+    .menu-card-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-dk); border: 1px solid var(--gold-dk);
+      padding: 2px 8px; width: fit-content;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img {
+      aspect-ratio: 4/5; background: var(--card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      gap: 12px; color: var(--muted); position: relative; overflow: hidden;
+    }
+    .about-img::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.04), transparent 60%);
+    }
+    .about-img span { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .about-text { }
+    .about-p { font-size: 15px; color: var(--mid); line-height: 1.9; margin-bottom: 1rem; }
+    .about-p strong { color: var(--text); font-weight: 400; }
+    .about-details { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; border-top: 1px solid var(--border); }
+    .about-detail { display: flex; justify-content: space-between; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .about-detail-label { color: var(--muted); letter-spacing: 0.05em; }
+    .about-detail-val { color: var(--text); font-weight: 400; text-align: right; }
+
+    /* ── REVIEWS — AUTO SCROLL MARQUEE ── */
+    .reviews-marquee-wrap {
+      margin-top: 3rem; overflow: hidden; position: relative;
+      mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+    }
+    .reviews-track {
+      display: flex; gap: 1.2rem; width: max-content;
+      animation: scrollReviews 38s linear infinite;
+    }
+    .reviews-marquee-wrap:hover .reviews-track { animation-play-state: paused; }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border); padding: 1.8rem;
+      width: 340px; flex-shrink: 0; transition: border-color 0.25s, transform 0.25s;
+    }
+    .review-card:hover { border-color: var(--gold-dk); transform: translateY(-3px); }
+    .review-stars { color: var(--gold); letter-spacing: 3px; font-size: 13px; margin-bottom: 1.1rem; }
+    .review-text { font-family: var(--serif); font-size: 16px; font-style: italic; font-weight: 300; color: var(--mid); line-height: 1.7; margin-bottom: 1.3rem; min-height: 96px; }
+    .review-author { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .review-google { display: inline-flex; align-items: center; gap: 4px; }
+    @keyframes scrollReviews {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── REZERVARE ── */
+    .rezervare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .rez-info { }
+    .rez-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem; }
+    .rez-title em { font-style: italic; color: var(--gold); }
+    .rez-sub { font-size: 15px; color: var(--mid); line-height: 1.8; margin-bottom: 2rem; }
+    .rez-details { display: flex; flex-direction: column; gap: 0; }
+    .rez-row { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .rez-icon { font-size: 16px; margin-top: 2px; flex-shrink: 0; opacity: 0.7; }
+    .rez-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .rez-val { font-size: 14px; color: var(--text); }
+
+    .rez-form-card { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; }
+    .rez-form-title { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--text); margin-bottom: 0.3rem; }
+    .rez-form-sub { font-size: 13px; color: var(--muted); margin-bottom: 1.8rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 0.8rem 1rem; background: var(--ink);
+      border: 1px solid var(--border); color: var(--text);
+      font-family: var(--sans); font-size: 14px; font-weight: 300;
+      outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); }
+    .fg textarea { min-height: 80px; resize: vertical; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rez-submit {
+      width: 100%; padding: 1rem; background: var(--gold); color: var(--ink);
+      border: none; font-family: var(--sans); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s; margin-top: 0.5rem;
+    }
+    .rez-submit:hover { background: var(--gold-lt); }
+    .rez-success { display: none; padding: 1rem; border: 1px solid var(--gold-dk); color: var(--gold); font-size: 13px; text-align: center; margin-top: 1rem; background: rgba(201,168,76,0.05); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right.visible { opacity: 1; transform: none; }
+    .split-word { display: inline-block; overflow: hidden; }
+    .split-word-inner { display: inline-block; transform: translateY(105%); opacity: 0; transition: transform 0.8s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease; }
+    .split-word-inner.visible { transform: translateY(0); opacity: 1; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes expandW { from { width: 0; opacity: 0; } to { width: 80px; opacity: 1; } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .sec { padding: 4rem 1.5rem; }
+      .about-grid, .rezervare-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .strip { gap: 0; overflow-x: auto; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .hero-stats { gap: 1.5rem; }
+      .fg-row { grid-template-columns: 1fr; }
+      .menu-category.active { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
+      .split-word-inner { transform: none; opacity: 1; }
+    }
+
+    .rez-maps-link {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 5px;
+      font-size: 12px; color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid var(--gold-dk); padding-bottom: 1px;
+      transition: color 0.2s;
+    }
+    .rez-maps-link:hover { color: var(--gold-lt); }
+    .rez-phone { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .rez-phone:hover { color: var(--gold); }
+    .rez-delivery-note { font-size: 14px; color: var(--mid); }
+    .rez-map-preview {
+      margin-top: 1.5rem; border: 1px solid var(--border); cursor: pointer;
+      transition: border-color 0.2s; overflow: hidden; position: relative;
+      background: var(--card);
+    }
+    .rez-map-preview:hover { border-color: var(--gold-dk); }
+    .rez-map-inner {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem; position: relative; z-index: 1;
+      background: rgba(28,24,16,0.9);
+    }
+    .rez-map-pin { font-size: 20px; }
+    .rez-map-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .rez-map-addr { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .rez-map-arrow { margin-left: auto; color: var(--gold); font-size: 16px; transition: transform 0.2s; }
+    .rez-map-preview:hover .rez-map-arrow { transform: translateX(4px); }
+    .rez-map-visual { position: absolute; inset: 0; pointer-events: none; }
+
+    /* ── CALENDAR ── */
+    .cal-wrap, .clock-wrap { position: relative; }
+    .cal-input, .clock-input {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 1rem; background: var(--ink); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; font-size: 14px; font-family: var(--sans);
+      transition: border-color 0.2s; user-select: none;
+    }
+    .cal-input:hover, .clock-input:hover { border-color: var(--gold-dk); }
+    .cal-input.open, .clock-input.open { border-color: var(--gold); }
+
+    .cal-dropdown, .clock-dropdown {
+      display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--card); border: 1px solid var(--gold-dk); z-index: 500;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      animation: fadeIn 0.2s ease;
+    }
+    .cal-dropdown.open, .clock-dropdown.open { display: block; }
+
+    .cal-header { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); }
+    .cal-month-label { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--text); letter-spacing: 0.05em; }
+    .cal-nav { background: none; border: 1px solid var(--border); color: var(--mid); width: 28px; height: 28px; cursor: pointer; font-size: 16px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: var(--sans); }
+    .cal-nav:hover { border-color: var(--gold); color: var(--gold); }
+
+    .cal-days-header { display: grid; grid-template-columns: repeat(7,1fr); padding: 0.5rem 0.6rem 0; }
+    .cal-days-header span { text-align: center; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0.3rem 0; }
+
+    .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; padding: 0.4rem 0.6rem 0.8rem; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--mid); cursor: pointer; border-radius: 2px;
+      transition: all 0.15s; border: 1px solid transparent;
+    }
+    .cal-day:hover { background: var(--surface); color: var(--text); border-color: var(--border); }
+    .cal-day.today { color: var(--gold); border-color: var(--gold-dk); }
+    .cal-day.selected { background: var(--gold); color: var(--ink); font-weight: 600; }
+    .cal-day.past { color: var(--muted); opacity: 0.35; pointer-events: none; }
+    .cal-day.empty { pointer-events: none; }
+
+    /* ── CLOCK ── */
+    .clock-face-wrap { padding: 1.2rem 1.5rem 0.5rem; display: flex; justify-content: center; }
+    .clock-face { width: 160px; height: 160px; cursor: pointer; display: block; }
+    .clock-time-display { text-align: center; font-family: var(--serif); font-size: 28px; font-weight: 300; color: var(--gold); letter-spacing: 0.1em; padding: 0.3rem 0 0.8rem; }
+    .clock-slots { padding: 0 1rem 1rem; border-top: 1px solid var(--border); }
+    .clock-slots-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0 0.5rem; }
+    .clock-slots-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; }
+    .clock-slot {
+      padding: 0.4rem; text-align: center; font-size: 12px; color: var(--mid);
+      border: 1px solid var(--border); cursor: pointer; transition: all 0.15s;
+      font-family: var(--sans);
+    }
+    .clock-slot:hover { border-color: var(--gold-dk); color: var(--text); }
+    .clock-slot.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">AURO</a>
+  <ul class="nav-links">
+    <li><a href="#meniu">Meniu</a></li>
+    <li><a href="#despre">Despre</a></li>
+    <li><a href="#recenzii">Recenzii</a></li>
+    <li><a href="#rezervare">Rezervare</a></li>
+  </ul>
+  <a href="#rezervare" class="nav-cta">Rezervă o masă</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-meander-top"></div>
+  <p class="hero-tag">Str. Sfântul Andrei 67 · Iași · Bucătărie Grecească</p>
+  <h1 class="hero-title">
+    AURO
+    <em>Restaurant</em>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">Gusturile Greciei, în inima Iașului. Ingrediente proaspete, rețete autentice și o atmosferă care te poartă direct la Mediterana.</p>
+  <div class="hero-actions">
+    <a href="#rezervare" class="btn-gold">Rezervă o masă</a>
+    <a href="#meniu" class="btn-outline-gold">Vezi meniul</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hstat-num">4.9★</div>
+      <div class="hstat-label">Google Reviews</div>
+    </div>
+    <div>
+      <div class="hstat-num">44+</div>
+      <div class="hstat-label">Recenzii verificate</div>
+    </div>
+    <div>
+      <div class="hstat-num">100%</div>
+      <div class="hstat-label">Ingrediente proaspete</div>
+    </div>
+  </div>
+  <div class="hero-meander-bottom"></div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="strip-dot"></span>Gyros autentic</div>
+  <div class="strip-item"><span class="strip-dot"></span>Hummus de casă</div>
+  <div class="strip-item"><span class="strip-dot"></span>Fructe de mare proaspete</div>
+  <div class="strip-item"><span class="strip-dot"></span>Salată grecească</div>
+  <div class="strip-item"><span class="strip-dot"></span>Deserturi tradiționale</div>
+  <div class="strip-item"><span class="strip-dot"></span>Vinuri grecești selecte</div>
+</div>
+
+<!-- MENIU -->
+<div class="sec-wrap">
+  <div class="sec" id="meniu">
+    <p class="eyebrow reveal">Meniu</p>
+    <h2 class="sec-title reveal">Savori din <em>Grecia</em>,<br>gătite cu dragoste.</h2>
+    <p class="sec-sub reveal" style="margin-bottom: 2.5rem;">Fiecare preparat e gătit la comandă, cu ingrediente selectate zilnic. Prețurile includ TVA.</p>
+    <div class="reveal">
+      <div class="menu-tabs">
+        <button class="menu-tab active" onclick="switchTab(this,'aperitive')">Aperitive</button>
+        <button class="menu-tab" onclick="switchTab(this,'salate')">Salate</button>
+        <button class="menu-tab" onclick="switchTab(this,'preparate')">Feluri principale</button>
+        <button class="menu-tab" onclick="switchTab(this,'fructe')">Fructe de mare</button>
+        <button class="menu-tab" onclick="switchTab(this,'deserturi')">Deserturi</button>
+      </div>
+
+      <div id="aperitive" class="menu-category active">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🫙</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Tzatziki</div><div class="menu-card-price">29 lei</div></div>
+            <div class="menu-card-desc">Iaurt grecesc, castravete, usturoi, condimentat · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥙</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Tyrokafteri</div><div class="menu-card-price">29 lei</div></div>
+            <div class="menu-card-desc">Cremă de brânză feta cu ardei iute verde, chilli, ulei de măsline · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍽️</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Taramosalata</div><div class="menu-card-price">29 lei</div></div>
+            <div class="menu-card-desc">Icre de crap sau ton afumate, ulei de măsline, pâine tostată · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥣</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Multosalata</div><div class="menu-card-price">35 lei</div></div>
+            <div class="menu-card-desc">Tzatziki, tyrokafteri, taramosalata, pită caldă artizanală</div>
+            <div class="menu-card-tag">Bestseller</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🫒</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Maslini Kalamata</div><div class="menu-card-price">25 lei</div></div>
+            <div class="menu-card-desc">Măsline negre Kalamata, ulei de măsline, oregano · 150g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🧀</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Feta</div><div class="menu-card-price">29 lei</div></div>
+            <div class="menu-card-desc">Brânză feta grecească autentică, ulei de măsline, oregano · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍞</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Hummus cu creveți</div><div class="menu-card-price">49 lei</div></div>
+            <div class="menu-card-desc">Hummus cremos, creveți sotați, paprika afumată, pită caldă · 300g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥙</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Hummus cu carne de porc</div><div class="menu-card-price">45 lei</div></div>
+            <div class="menu-card-desc">Hummus, carne de porc, paprika afumată · 300g</div>
+            <div class="menu-card-tag">Specialitatea casei</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍆</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Hummus cu caciucavalla</div><div class="menu-card-price">45 lei</div></div>
+            <div class="menu-card-desc">Hummus, brânză caciucavalla la grătar, paprika afumată, ardei iute · 300g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🫑</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Hummus cu carne de porc afumat</div><div class="menu-card-price">45 lei</div></div>
+            <div class="menu-card-desc">Hummus, porc afumat, condimentat, paprika, ardei iute · 300g</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="salate" class="menu-category">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥗</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Horiatiki — Salată grecească</div><div class="menu-card-price">39 lei</div></div>
+            <div class="menu-card-desc">Roșii, castraveți, ardei gras, ceapă roșie, feta, măsline Kalamata, ulei de măsline · 400g</div>
+            <div class="menu-card-tag">Clasic grecesc</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥗</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Salată cu halloumi și graviera</div><div class="menu-card-price">49 lei</div></div>
+            <div class="menu-card-desc">Mix verde, halloumi la grătar, graviera, roșii cherry, ulei de măsline · 350g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥗</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Salată mediteraneană cu creveți</div><div class="menu-card-price">55 lei</div></div>
+            <div class="menu-card-desc">Creveți sotați, mix de salată, roșii uscate, ulei de măsline, condimentat · 350g</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="preparate" class="menu-category">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥩</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Gyros de porc</div><div class="menu-card-price">42 lei</div></div>
+            <div class="menu-card-desc">Carne de porc marinată, tzatziki, roșii, ceapă, pită caldă · 400g</div>
+            <div class="menu-card-tag">Bestseller</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍗</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Gyros de pui</div><div class="menu-card-price">40 lei</div></div>
+            <div class="menu-card-desc">Piept de pui marinat, tzatziki, legume proaspete, pită · 400g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍲</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Moussaka</div><div class="menu-card-price">52 lei</div></div>
+            <div class="menu-card-desc">Vinete, carne tocată de vită, sos béchamel, scorțișoară, copt la cuptor · 450g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍝</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Pastitsio</div><div class="menu-card-price">48 lei</div></div>
+            <div class="menu-card-desc">Paste grecești, carne tocată condimentată, sos béchamel copt · 450g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍢</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Souvlaki de miel</div><div class="menu-card-price">62 lei</div></div>
+            <div class="menu-card-desc">Frigărui de miel marinate 24h, pita, tzatziki, legume · 350g</div>
+            <div class="menu-card-tag">Specialitatea casei</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🥩</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Souvlaki de porc</div><div class="menu-card-price">52 lei</div></div>
+            <div class="menu-card-desc">Frigărui de porc, condimentat, salată, tzatziki, pită caldă · 350g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🫕</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Stifado de vită</div><div class="menu-card-price">58 lei</div></div>
+            <div class="menu-card-desc">Tocăniță de vită cu cepe perlate, vin roșu, scorțișoară, cuișoare · 400g</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fructe" class="menu-category">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🦑</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Calamari la grătar</div><div class="menu-card-price">62 lei</div></div>
+            <div class="menu-card-desc">Calamar întreg marinat, lămâie, ierburi mediteraneene, ulei de măsline · 350g</div>
+            <div class="menu-card-tag">Recomandăm</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🐙</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Octopus la grătar</div><div class="menu-card-price">72 lei</div></div>
+            <div class="menu-card-desc">Caracatiță marinată, capere, lămâie, ulei de măsline, oregano · 300g</div>
+            <div class="menu-card-tag">Specialitatea casei</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍤</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Creveți saganaki</div><div class="menu-card-price">68 lei</div></div>
+            <div class="menu-card-desc">Creveți în sos de roșii cu feta, ardei iute, legume, oregano · 350g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🐟</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Loaded Greek Fries cu fructe de mare</div><div class="menu-card-price">59 lei</div></div>
+            <div class="menu-card-desc">Cartofi prăjiți, feta, creveți, tzatziki, roșii, ceapă roșie · 400g</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deserturi" class="menu-category">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍯</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Baklava</div><div class="menu-card-price">25 lei</div></div>
+            <div class="menu-card-desc">Foi de plăcintă, nuci, miere de thym, apă de trandafiri · 150g</div>
+            <div class="menu-card-tag">Bestseller</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍊</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Portokalopita</div><div class="menu-card-price">28 lei</div></div>
+            <div class="menu-card-desc">Prăjitură cu portocale și iogurt grec, sirop aromat, coajă de portocală · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍩</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Loukoumades</div><div class="menu-card-price">22 lei</div></div>
+            <div class="menu-card-desc">Gogoși grecești pufoase, miere de thym, scorțișoară, nucă prăjită · 200g</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="menu-card-img-icon">🍮</div><span>Foto preparat</span></div>
+          <div class="menu-card-body">
+            <div class="menu-card-top"><div class="menu-card-name">Galaktoboureko</div><div class="menu-card-price">26 lei</div></div>
+            <div class="menu-card-desc">Cremă de griș în foi de plăcintă crocante, sirop de portocale și miere · 200g</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESPRE -->
+<div class="sec-wrap-alt">
+  <div class="sec" id="despre">
+    <div class="about-grid">
+      <div class="about-img reveal-left">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Foto restaurant</span>
+      </div>
+      <div class="about-text reveal-right">
+        <p class="eyebrow">Povestea noastră</p>
+        <h2 class="sec-title">O bucătărie cu <em>suflet</em><br>mediteranean.</h2>
+        <p class="about-p">AURO s-a născut dintr-o pasiune sinceră pentru bucătăria grecească autentică — nu adaptată, nu simplificată. <strong>Rețete transmise din generație în generație</strong>, gătite cu ingrediente selectate cu grijă.</p>
+        <p class="about-p">Fiecare preparat e o invitație. Mirosul pâinii pita calde, hummus-ul cremos, carnea marinată ore în șir — toate spun aceeași poveste: <strong>Grecia e mai aproape decât crezi.</strong></p>
+        <div class="about-details">
+          <div class="about-detail"><span class="about-detail-label">Adresă</span><span class="about-detail-val"><a href="https://maps.google.com/?q=AURO+Restaurant+Str+Sfantul+Andrei+67+Iasi" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dk)">Str. Sfântul Andrei 67, Iași ↗</a></span></div>
+          <div class="about-detail"><span class="about-detail-label">Program</span><span class="about-detail-val">Luni–Duminică: 12:00–23:30</span></div>
+          <div class="about-detail"><span class="about-detail-label">Telefon</span><span class="about-detail-val">+40 747 888 883</span></div>
+          <div class="about-detail"><span class="about-detail-label">Bucătărie</span><span class="about-detail-val">Grecească autentică</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECENZII -->
+<div class="sec-wrap">
+  <div class="sec" id="recenzii">
+    <p class="eyebrow reveal">Ce spun oaspeții</p>
+    <h2 class="sec-title reveal">4.9★ — pentru că <em>gustul</em><br>vorbește singur.</h2>
+    <div class="reviews-marquee-wrap reveal">
+      <div class="reviews-track" id="reviewsTrack">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Ceva ce Iașului îi lipsea de mult timp. Felicitări! Extraordinar de bun — produse top, mâncare top, serviciu top."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Restaurant grec nou care surprinde plăcut. Am comandat hummus cu porc, gyros și salată grecească. Totul era proaspăt și bine echilibrat ca arome."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · L.G.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Restaurant excepțional! Merită tot susținut — e la început și are tot ce trebuie să devină unul din cele mai bune locuri din Iași."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Porțiile sunt generoase, gustul e autentic — am simțit că sunt înapoi în Atena. Personalul foarte atent și prietenos."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Andreea P.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Am rezervat pentru o aniversare și a fost o alegere perfectă. Atmosfera caldă, mâncare delicioasă, recomand din suflet."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Mihai T.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Cel mai bun gyros pe care l-am mâncat în Iași. Ingredientele proaspete se simt în fiecare mușcătură."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Ceva ce Iașului îi lipsea de mult timp. Felicitări! Extraordinar de bun — produse top, mâncare top, serviciu top."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Restaurant grec nou care surprinde plăcut. Am comandat hummus cu porc, gyros și salată grecească. Totul era proaspăt și bine echilibrat ca arome."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · L.G.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Restaurant excepțional! Merită tot susținut — e la început și are tot ce trebuie să devină unul din cele mai bune locuri din Iași."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Porțiile sunt generoase, gustul e autentic — am simțit că sunt înapoi în Atena. Personalul foarte atent și prietenos."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Andreea P.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Am rezervat pentru o aniversare și a fost o alegere perfectă. Atmosfera caldă, mâncare delicioasă, recomand din suflet."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Mihai T.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Cel mai bun gyros pe care l-am mâncat în Iași. Ingredientele proaspete se simt în fiecare mușcătură."</p>
+          <div class="review-author"><span class="review-google">🟢 Google</span> · Client verificat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REZERVARE -->
+<div class="sec-wrap-alt">
+  <div class="sec" id="rezervare">
+    <div class="rezervare-grid">
+      <div class="reveal-left">
+        <p class="eyebrow">Rezervare</p>
+        <h2 class="rez-title">Rezervă<br>masa ta <em>acum.</em></h2>
+        <p class="rez-sub">Completează formularul și te confirmăm în cel mai scurt timp. Sau sună-ne direct.</p>
+        <div class="rez-details">
+          <div class="rez-row">
+            <div class="rez-icon">📍</div>
+            <div>
+              <div class="rez-label">Adresă</div>
+              <div class="rez-val">Str. Sfântul Andrei 67, Iași</div>
+              <a href="https://maps.google.com/?q=AURO+Restaurant+Str+Sfantul+Andrei+67+Iasi" target="_blank" class="rez-maps-link">
+                <span>Vezi pe Google Maps</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="rez-row">
+            <div class="rez-icon">🕐</div>
+            <div>
+              <div class="rez-label">Program</div>
+              <div class="rez-val">Luni–Duminică: 12:00–23:30</div>
+            </div>
+          </div>
+          <div class="rez-row">
+            <div class="rez-icon">📞</div>
+            <div>
+              <div class="rez-label">Telefon</div>
+              <div class="rez-val"><a href="tel:+40747888883" class="rez-phone">+40 747 888 883</a></div>
+            </div>
+          </div>
+          <div class="rez-row">
+            <div class="rez-icon">🚗</div>
+            <div>
+              <div class="rez-label">Livrare</div>
+              <div class="rez-val rez-delivery-note">Servim exclusiv în restaurant.<br><span style="font-size:12px;color:var(--muted)">Rezervă o masă sau vino la noi.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MINI MAP EMBED -->
+        <div class="rez-map-preview" onclick="window.open('https://maps.google.com/?q=AURO+Restaurant+Str+Sfantul+Andrei+67+Iasi','_blank')">
+          <div class="rez-map-inner">
+            <div class="rez-map-pin">📍</div>
+            <div class="rez-map-label">
+              <div class="rez-map-name">AURO Restaurant</div>
+              <div class="rez-map-addr">Str. Sfântul Andrei 67, Iași</div>
+            </div>
+            <div class="rez-map-arrow">→</div>
+          </div>
+          <div class="rez-map-visual">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;opacity:0.15">
+              <!-- decorative street grid -->
+              <line x1="0" y1="60" x2="300" y2="60" stroke="var(--gold)" stroke-width="2"/>
+              <line x1="0" y1="30" x2="300" y2="30" stroke="var(--gold)" stroke-width="0.5"/>
+              <line x1="0" y1="90" x2="300" y2="90" stroke="var(--gold)" stroke-width="0.5"/>
+              <line x1="80" y1="0" x2="80" y2="120" stroke="var(--gold)" stroke-width="0.5"/>
+              <line x1="160" y1="0" x2="160" y2="120" stroke="var(--gold)" stroke-width="2"/>
+              <line x1="240" y1="0" x2="240" y2="120" stroke="var(--gold)" stroke-width="0.5"/>
+              <circle cx="160" cy="60" r="8" fill="var(--gold)" opacity="0.8"/>
+              <circle cx="160" cy="60" r="16" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+              <circle cx="160" cy="60" r="24" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="rez-form-card">
+          <div class="rez-form-title">Rezervă o masă</div>
+          <div class="rez-form-sub">Răspundem în maximum 2 ore.</div>
+          <div class="fg-row">
+            <div class="fg"><label>Nume</label><input type="text" placeholder="Numele dvs." id="r-name"/></div>
+            <div class="fg"><label>Telefon</label><input type="tel" placeholder="+40 7XX XXX XXX" id="r-tel"/></div>
+          </div>
+          <!-- CUSTOM DATE PICKER -->
+          <div class="fg">
+            <label>Data</label>
+            <div class="cal-wrap" id="calWrap">
+              <div class="cal-input" onclick="toggleCal()">
+                <span id="calDisplay">Alege o dată</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="cal-dropdown" id="calDropdown">
+                <div class="cal-header">
+                  <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+                  <span class="cal-month-label" id="calMonthLabel"></span>
+                  <button class="cal-nav" onclick="changeMonth(1)">›</button>
+                </div>
+                <div class="cal-days-header">
+                  <span>Lu</span><span>Ma</span><span>Mi</span><span>Jo</span><span>Vi</span><span>Sâ</span><span>Du</span>
+                </div>
+                <div class="cal-grid" id="calGrid"></div>
+              </div>
+            </div>
+            <input type="hidden" id="r-date"/>
+          </div>
+
+          <!-- CUSTOM TIME PICKER -->
+          <div class="fg">
+            <label>Ora</label>
+            <div class="clock-wrap" id="clockWrap">
+              <div class="clock-input" onclick="toggleClock()">
+                <span id="clockDisplay">19:00</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="clock-dropdown" id="clockDropdown">
+                <div class="clock-face-wrap">
+                  <svg class="clock-face" id="clockFace" viewBox="0 0 200 200" onclick="handleClockClick(event)">
+                    <circle cx="100" cy="100" r="96" fill="#1c1810" stroke="var(--border)" stroke-width="1"/>
+                    <!-- Hour marks -->
+                    <g id="clockMarks"></g>
+                    <!-- Hands -->
+                    <line id="hourHand" x1="100" y1="100" x2="100" y2="45" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+                    <line id="minHand" x1="100" y1="100" x2="100" y2="30" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="100" cy="100" r="4" fill="var(--gold)"/>
+                  </svg>
+                </div>
+                <div class="clock-time-display" id="clockTimeDisplay">19:00</div>
+                <div class="clock-slots">
+                  <div class="clock-slots-label">Ore disponibile</div>
+                  <div class="clock-slots-grid" id="clockSlotsGrid"></div>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="r-time" value="19:00"/>
+          </div>
+          <div class="fg">
+            <label>Număr persoane</label>
+            <select id="r-persons">
+              <option>1 persoană</option>
+              <option selected>2 persoane</option>
+              <option>3 persoane</option>
+              <option>4 persoane</option>
+              <option>5–6 persoane</option>
+              <option>7+ persoane</option>
+            </select>
+          </div>
+          <div class="fg"><label>Mențiuni (opțional)</label><textarea placeholder="Alergii, ocazie specială, preferințe..." id="r-msg"></textarea></div>
+          <button class="rez-submit" onclick="submitRez()">Trimite rezervarea →</button>
+          <div class="rez-success" id="rez-success">✓ Rezervarea a fost primită. Vă confirmăm în curând!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AURO</div>
+  <div class="footer-copy">© 2025 AURO Restaurant · Iași, România · Bucătărie Grecească</div>
+</footer>
+
+<script>
+  /* PROGRESS BAR */
+  const pb = document.getElementById('pb');
+  window.addEventListener('scroll', () => {
+    const t = document.documentElement.scrollHeight - window.innerHeight;
+    pb.style.width = (window.scrollY / t * 100) + '%';
+  }, { passive: true });
+
+  /* NAV */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* REVEAL */
+  const ro = new IntersectionObserver((es) => {
+    es.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); ro.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  const slo = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); slo.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => slo.observe(el));
+
+  /* MENU TABS */
+  function switchTab(btn, id) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-category').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+
+  /* MENU ITEM HOVER — subtle gold left border */
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      item.style.borderLeft = '2px solid var(--gold-dk)';
+      item.style.paddingLeft = 'calc(1.8rem - 2px)';
+    });
+    item.addEventListener('mouseleave', () => {
+      item.style.borderLeft = '';
+      item.style.paddingLeft = '';
+    });
+  });
+
+  /* SMOOTH SCROLL */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* FORM */
+  function submitRez() {
+    const n = document.getElementById('r-name').value.trim();
+    const t = document.getElementById('r-tel').value.trim();
+    const d = document.getElementById('r-date').value;
+    if (!n || !t || !d) { alert('Vă rugăm completați numele, telefonul și data dorită.'); return; }
+    document.getElementById('rez-success').style.display = 'block';
+    const btn = document.querySelector('.rez-submit');
+    btn.disabled = true; btn.style.opacity = '0.5'; btn.textContent = 'Trimis ✓';
+  }
+
+  /* STRIP DRAG SCROLL */
+  const strip = document.querySelector('.strip');
+  let isDown = false, startX, scrollLeft;
+  strip.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - strip.offsetLeft; scrollLeft = strip.scrollLeft; });
+  strip.addEventListener('mouseleave', () => isDown = false);
+  strip.addEventListener('mouseup', () => isDown = false);
+  strip.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - strip.offsetLeft;
+    strip.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+
+  /* ── CALENDAR ── */
+  let calDate = new Date();
+  let calSelected = null;
+  let calYear = calDate.getFullYear();
+  let calMonth = calDate.getMonth();
+  const months = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+
+  function renderCal() {
+    document.getElementById('calMonthLabel').textContent = months[calMonth] + ' ' + calYear;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    const first = new Date(calYear, calMonth, 1).getDay();
+    const offset = first === 0 ? 6 : first - 1;
+    const days = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = new Date();
+    for (let i = 0; i < offset; i++) {
+      const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+    }
+    for (let d = 1; d <= days; d++) {
+      const el = document.createElement('div'); el.className = 'cal-day';
+      el.textContent = d;
+      const thisDate = new Date(calYear, calMonth, d);
+      if (thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) el.classList.add('past');
+      if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) el.classList.add('today');
+      if (calSelected && d === calSelected.getDate() && calMonth === calSelected.getMonth() && calYear === calSelected.getFullYear()) el.classList.add('selected');
+      el.onclick = () => selectDay(d);
+      grid.appendChild(el);
+    }
+  }
+  function selectDay(d) {
+    calSelected = new Date(calYear, calMonth, d);
+    const dd = String(calSelected.getDate()).padStart(2,'0');
+    const mm = String(calSelected.getMonth()+1).padStart(2,'0');
+    document.getElementById('calDisplay').textContent = dd + ' ' + months[calSelected.getMonth()] + ' ' + calSelected.getFullYear();
+    document.getElementById('r-date').value = calSelected.getFullYear() + '-' + mm + '-' + dd;
+    document.getElementById('calDropdown').classList.remove('open');
+    document.getElementById('calWrap').querySelector('.cal-input').classList.remove('open');
+    renderCal();
+  }
+  function changeMonth(dir) {
+    calMonth += dir;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCal();
+  }
+  function toggleCal() {
+    const dd = document.getElementById('calDropdown');
+    const inp = document.getElementById('calWrap').querySelector('.cal-input');
+    const isOpen = dd.classList.contains('open');
+    document.querySelectorAll('.cal-dropdown, .clock-dropdown').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('.cal-input, .clock-input').forEach(el => el.classList.remove('open'));
+    if (!isOpen) { dd.classList.add('open'); inp.classList.add('open'); renderCal(); }
+  }
+
+  /* ── CLOCK ── */
+  let clockHour = 19; let clockMin = 0; let clockSelected = '19:00';
+  function renderClock() {
+    const hourAngle = (clockHour % 12) / 12 * 360 - 90;
+    const minAngle = clockMin / 60 * 360 - 90;
+    const hRad = hourAngle * Math.PI / 180;
+    const mRad = minAngle * Math.PI / 180;
+    const hLen = 38; const mLen = 50;
+    document.getElementById('hourHand').setAttribute('x2', 100 + hLen * Math.cos(hRad));
+    document.getElementById('hourHand').setAttribute('y2', 100 + hLen * Math.sin(hRad));
+    document.getElementById('minHand').setAttribute('x2', 100 + mLen * Math.cos(mRad));
+    document.getElementById('minHand').setAttribute('y2', 100 + mLen * Math.sin(mRad));
+    // Hour marks
+    const marks = document.getElementById('clockMarks');
+    marks.innerHTML = '';
+    for (let i = 1; i <= 12; i++) {
+      const a = (i / 12 * 360 - 90) * Math.PI / 180;
+      const x = 100 + 78 * Math.cos(a); const y = 100 + 78 * Math.sin(a);
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('fill', i === clockHour % 12 || (clockHour === 12 && i === 12) ? '#c9a84c' : '#5a5040');
+      t.setAttribute('font-size','12'); t.setAttribute('font-family','Inter,sans-serif');
+      t.textContent = i;
+      marks.appendChild(t);
+    }
+    const timeStr = String(clockHour).padStart(2,'0') + ':' + String(clockMin).padStart(2,'0');
+    document.getElementById('clockTimeDisplay').textContent = timeStr;
+    document.getElementById('r-time').value = timeStr;
+    document.getElementById('clockDisplay').textContent = timeStr;
+    // Slots
+    const slotsGrid = document.getElementById('clockSlotsGrid');
+    slotsGrid.innerHTML = '';
+    const slots = ['12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
+    slots.forEach(s => {
+      const el = document.createElement('div'); el.className = 'clock-slot';
+      if (s === clockSelected) el.classList.add('selected');
+      el.textContent = s;
+      el.onclick = () => { clockSelected = s; clockHour = parseInt(s); clockMin = 0; renderClock(); };
+      slotsGrid.appendChild(el);
+    });
+  }
+  function handleClockClick(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = e.clientX - rect.left; const cy = e.clientY - rect.top;
+    const scale = 200 / rect.width;
+    const x = cx * scale - 100; const y = cy * scale - 100;
+    const angle = Math.atan2(y, x) * 180 / Math.PI + 90;
+    const normalised = ((angle % 360) + 360) % 360;
+    const dist = Math.sqrt(x*x + y*y);
+    // Inner half of clock = :30, outer = :00 (like a real analog minute distinction by radius is tricky, so use angle granularity instead)
+    const slot12 = Math.round(normalised / 15) % 24; // 24 slots of 15deg = 30min steps across 12h
+    let h = Math.floor(slot12 / 2) + 12;
+    let m = (slot12 % 2) * 30;
+    if (h > 23) h = 12;
+    clockHour = h; clockMin = m;
+    clockSelected = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+    renderClock();
+  }
+  function toggleClock() {
+    const dd = document.getElementById('clockDropdown');
+    const inp = document.getElementById('clockWrap').querySelector('.clock-input');
+    const isOpen = dd.classList.contains('open');
+    document.querySelectorAll('.cal-dropdown, .clock-dropdown').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('.cal-input, .clock-input').forEach(el => el.classList.remove('open'));
+    if (!isOpen) { dd.classList.add('open'); inp.classList.add('open'); renderClock(); }
+  }
+
+  /* Close on outside click */
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.cal-wrap') && !e.target.closest('.clock-wrap')) {
+      document.querySelectorAll('.cal-dropdown, .clock-dropdown').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.cal-input, .clock-input').forEach(el => el.classList.remove('open'));
+    }
+  });
+
+  /* Init clock display */
+  renderClock();
+
+</script>
+</body>
+</html>
