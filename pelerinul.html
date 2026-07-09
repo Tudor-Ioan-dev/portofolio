@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Patiseria Pelerinul · Cald, proaspăt, lângă Mitropolie · Iași din 1999</title>
+<meta name="description" content="Patiseria Pelerinul, Bd. Ștefan cel Mare și Sfânt 16, Iași — lângă Mitropolie. Prăjituri proaspete, specialități de post, cozonaci și pască de sărbători. Din 1999." />
+
+<!--
+  DEMO Patiseria Pelerinul · construit de Tudor Ilisei · single-file HTML/CSS/JS
+  DATE REALE (surse: mmb.ro, doxologia.ro, soimiipatiseri.ro, articol pisiceli 2018, near-place):
+    Adresă: Bd. Ștefan cel Mare și Sfânt nr. 16, 700064 Iași (lângă Librăria Doxologia / Mitropolie)
+    Telefon: 0720 222 090 (fix: 0232 235 691) · Email: contact@cofetariapelerinul.ro
+    Facebook: facebook.com/cofetariapelerinul · Din iarna 1999 · parte din Mitropolia Moldovei și Bucovinei
+    Coordonate: 47.1622104, 27.5826582 · Rating pomenit: ~4.8
+  DE CONFIRMAT CU CLIENTUL (marcat vizibil în pagină cu *):
+    - PROGRAM: pus L–S 08:00–20:00, D 12:00–20:00 (sursă articol 2018) — de confirmat.
+    - PREȚURI: cozonac 40 lei/kg, pască 35 lei/kg (sursă 2020) — orientative, de confirmat.
+    - POZE: sloturile marcate „foto" se înlocuiesc cu poze reale (background-image pe .ph-slot).
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --crema:#FBF4E7;      /* warm cream base */
+    --crema-2:#F6EAD4;    /* soft panel */
+    --aluat:#EFDCB6;      /* dough */
+    --maro:#3A2A1C;       /* satin brown ink */
+    --maro-soft:#6B5844;  /* muted brown */
+    --maro-faint:#A8977F; /* faint */
+    --auriu:#C98A3B;      /* golden crust accent */
+    --auriu-dk:#A76E28;
+    --scortisoara:#B4652C;/* baked cinnamon (secondary warm) */
+    --lavanda:#6E5A93;    /* signature: lavender */
+    --lavanda-lt:#9A85BE;
+    --line:rgba(58,42,28,.14);
+    --line-2:rgba(58,42,28,.26);
+    --card:#FFFDF8;
+    --ok:#4E7A4E;         /* open green */
+    --serif:'Marcellus', serif;
+    --script:'Fraunces', serif;
+    --sans:'Inter', system-ui, sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --maxw:1180px;
+  }
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--crema); color:var(--maro);
+    font-family:var(--sans); font-weight:300; line-height:1.65;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  ::selection{ background:var(--lavanda); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,48px); }
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--sans); font-size:11px; letter-spacing:.34em; text-transform:uppercase;
+    color:var(--scortisoara); font-weight:500; display:inline-flex; align-items:center; gap:.7em;
+  }
+  .eyebrow::before{ content:""; width:24px; height:1.5px; background:var(--auriu); }
+  h1,h2,h3{ font-family:var(--serif); font-weight:400; line-height:1.08; letter-spacing:.01em; color:var(--maro); }
+  .display{ font-size:clamp(3.2rem,11vw,8rem); }
+  em{ font-family:var(--script); font-style:italic; color:var(--scortisoara); }
+
+  /* ---------- header ---------- */
+  header.top{
+    position:fixed; top:0; left:0; right:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px clamp(20px,5vw,48px);
+    transition:background .4s var(--ease), border-color .4s var(--ease), padding .3s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.top.scrolled{ background:rgba(251,244,231,.9); backdrop-filter:blur(12px); border-color:var(--line); padding-top:11px; padding-bottom:11px; }
+  .brand{ display:flex; align-items:center; gap:.7rem; }
+  .brand-seal{
+    width:40px; height:40px; border-radius:50%; flex:none;
+    background:radial-gradient(circle at 38% 34%, var(--auriu), var(--auriu-dk) 70%);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--crema); font-family:var(--serif); font-size:20px; line-height:1;
+    box-shadow:0 3px 14px rgba(167,110,40,.35); border:2px solid rgba(255,255,255,.35);
+  }
+  .brand-txt{ display:flex; flex-direction:column; line-height:1.05; }
+  .brand-txt b{ font-family:var(--serif); font-weight:400; font-size:1.2rem; letter-spacing:.03em; }
+  .brand-txt span{ font-size:.56rem; letter-spacing:.24em; text-transform:uppercase; color:var(--maro-soft); }
+  .top-cta{
+    display:inline-flex; align-items:center; gap:.5rem;
+    border:1px solid var(--line-2); border-radius:100px; padding:.55rem 1.2rem;
+    font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--maro);
+    transition:border-color .3s, color .3s, background .3s;
+  }
+  .top-cta:hover{ border-color:var(--auriu); color:var(--auriu-dk); background:rgba(201,138,59,.06); }
+  @media(max-width:560px){ .brand-txt span{ display:none; } .top-cta .lbl{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; min-height:100svh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:6rem 1.5rem 4rem; overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 50% 8%, rgba(201,138,59,.22), transparent 55%),
+      radial-gradient(90% 70% at 82% 92%, rgba(110,90,147,.12), transparent 60%),
+      linear-gradient(180deg, #FDF7EC 0%, var(--crema) 42%, var(--crema-2) 100%);
+  }
+  #embers{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+  .hero-inner{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
+  .hero .eyebrow{ opacity:0; animation:rise 1s var(--ease) .3s forwards; }
+  .hero .display{ margin:.7rem 0 .2rem; opacity:0; animation:rise 1.1s var(--ease) .45s forwards; }
+  .hero .lede{
+    font-family:var(--script); font-style:italic; font-size:clamp(1.2rem,2.6vw,1.8rem);
+    color:var(--maro-soft); max-width:24ch; opacity:0; animation:rise 1.1s var(--ease) .62s forwards;
+  }
+  .hero .lede b{ font-style:normal; font-weight:500; color:var(--scortisoara); }
+
+  /* fresh-from-oven live chip */
+  .oven-chip{
+    margin-top:2.2rem; display:inline-flex; align-items:center; gap:.7rem;
+    background:var(--card); border:1px solid var(--line); border-radius:100px;
+    padding:.6rem 1.1rem .6rem .8rem; box-shadow:0 8px 30px rgba(58,42,28,.08);
+    opacity:0; animation:rise 1.1s var(--ease) .85s forwards; max-width:92vw;
+  }
+  .oven-chip .flame{ width:26px; height:26px; flex:none; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .oven-chip .flame::after{ content:"🔥"; animation:flick 1.6s ease-in-out infinite; }
+  .oven-chip .oc-txt{ font-size:.9rem; color:var(--maro); text-align:left; line-height:1.25; }
+  .oven-chip .oc-txt small{ display:block; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--maro-faint); }
+  .oven-chip .oc-txt b{ font-weight:500; }
+  #ovenNow{ transition:opacity .4s var(--ease); }
+
+  .scroll-cue{ position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.6rem; opacity:0; animation:rise 1.2s 1.4s forwards; z-index:2; }
+  .scroll-cue span{ font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--maro-faint); }
+  .scroll-cue .bar{ width:1px; height:42px; background:linear-gradient(var(--auriu),transparent); animation:pulse 2.2s ease-in-out infinite; }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
+  @keyframes pulse{ 0%,100%{opacity:.3; transform:scaleY(.6);} 50%{opacity:1; transform:scaleY(1);} }
+  @keyframes flick{ 0%,100%{transform:rotate(-4deg) scale(1);} 50%{transform:rotate(4deg) scale(1.12);} }
+
+  /* ---------- marquee ---------- */
+  .strip{ background:var(--maro); color:var(--aluat); overflow:hidden; border-top:2px solid var(--auriu-dk); border-bottom:2px solid var(--auriu-dk); }
+  .marquee{ display:flex; white-space:nowrap; animation:slide 34s linear infinite; }
+  .marquee span{ font-family:var(--serif); font-size:clamp(1.1rem,2.2vw,1.6rem); padding:12px 0; display:inline-flex; align-items:center; }
+  .marquee b{ display:inline-flex; align-items:center; gap:26px; padding:0 26px; font-weight:400; }
+  .marquee i{ font-style:normal; color:var(--auriu); }
+  @keyframes slide{ to{ transform:translateX(-50%); } }
+
+  /* ---------- section base ---------- */
+  .band{ padding:clamp(72px,12vh,140px) 0; position:relative; }
+  .band-alt{ background:linear-gradient(180deg, var(--crema-2), #F1E2C4); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .sec-head{ max-width:760px; }
+  .sec-head h2{ font-size:clamp(2.1rem,5vw,3.5rem); margin:.6rem 0 .4rem; }
+  .sec-head p{ color:var(--maro-soft); font-size:clamp(1rem,1.4vw,1.1rem); max-width:56ch; }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+  .reveal.in{ opacity:1; transform:none; }
+  .d1{ transition-delay:.08s; } .d2{ transition-delay:.16s; } .d3{ transition-delay:.24s; }
+
+  /* ---------- story ---------- */
+  .story-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2rem,6vw,5rem); align-items:center; }
+  .story-copy p{ color:var(--maro-soft); margin-top:1.4rem; font-size:1.05rem; }
+  .story-copy p strong{ color:var(--maro); font-weight:500; }
+  .story-facts{ display:flex; flex-direction:column; border-top:1px solid var(--line); margin-top:2rem; }
+  .story-facts .f{ display:flex; justify-content:space-between; align-items:baseline; padding:1rem 0; border-bottom:1px solid var(--line); }
+  .story-facts .k{ font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--scortisoara); }
+  .story-facts .v{ font-family:var(--serif); font-size:1.3rem; }
+  .story-visual{
+    position:relative; aspect-ratio:4/5; border-radius:6px; overflow:hidden;
+    border:1px solid var(--line-2);
+    background:
+      radial-gradient(120% 80% at 30% 20%, rgba(201,138,59,.25), transparent 60%),
+      linear-gradient(160deg, #E9D3A6, #D8B77E 55%, #C99B57);
+    display:flex; align-items:flex-end; justify-content:flex-start;
+    box-shadow:0 30px 60px -30px rgba(58,42,28,.5);
+  }
+  .story-visual .ph-tag{ margin:1.2rem; font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(58,42,28,.5); background:rgba(255,255,255,.5); padding:4px 10px; border-radius:100px; }
+  .story-visual .wheat{ position:absolute; top:0; right:0; width:44%; opacity:.5; }
+
+  /* ---------- menu ---------- */
+  .menu-tabs{ display:flex; gap:0; flex-wrap:wrap; border-bottom:1px solid var(--line); margin:2.4rem 0 2.6rem; overflow-x:auto; scrollbar-width:none; }
+  .menu-tabs::-webkit-scrollbar{ display:none; }
+  .menu-tab{
+    padding:.9rem 1.5rem; font-family:var(--sans); font-size:12px; font-weight:500; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--maro-faint); cursor:pointer; white-space:nowrap;
+    background:none; border:none; border-bottom:2px solid transparent; transition:color .25s, border-color .25s;
+  }
+  .menu-tab:hover{ color:var(--maro); }
+  .menu-tab.active{ color:var(--auriu-dk); border-bottom-color:var(--auriu); }
+  .menu-cat{ display:none; }
+  .menu-cat.active{ display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1.4rem; animation:fade .45s ease; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  .p-card{ background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s; }
+  .p-card:hover{ transform:translateY(-4px); border-color:var(--auriu); box-shadow:0 18px 40px -22px rgba(58,42,28,.45); }
+  .ph-slot{
+    aspect-ratio:16/11; position:relative; display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(90% 80% at 30% 25%, rgba(255,255,255,.35), transparent 60%),
+      linear-gradient(150deg, #EAD3A4, #D8B87F 70%);
+    /* Poză reală: adaugă  style="background-image:url('poza.jpg')"  pe acest element */
+    background-size:cover; background-position:center;
+  }
+  .ph-slot .glyph{ font-size:2.2rem; opacity:.7; }
+  .ph-slot .ph{ position:absolute; bottom:.6rem; right:.7rem; font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(58,42,28,.45); }
+  .p-body{ padding:1.3rem 1.4rem 1.5rem; display:flex; flex-direction:column; flex:1; }
+  .p-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:.8rem; }
+  .p-name{ font-family:var(--serif); font-size:1.35rem; line-height:1.15; }
+  .p-price{ font-family:var(--serif); font-size:1.05rem; color:var(--auriu-dk); white-space:nowrap; padding-top:2px; }
+  .p-desc{ font-size:.88rem; color:var(--maro-soft); margin-top:.5rem; flex:1; }
+  .p-tag{ display:inline-block; margin-top:1rem; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--lavanda); border:1px solid var(--lavanda-lt); border-radius:100px; padding:3px 10px; width:fit-content; }
+  .p-tag.post{ color:var(--ok); border-color:var(--ok); }
+  .menu-note{ margin-top:2rem; font-size:.8rem; color:var(--maro-faint); font-style:italic; }
+
+  /* ---------- pre-order calculator ---------- */
+  .order-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+  .calc{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.8rem 1.8rem 2rem; box-shadow:0 24px 60px -34px rgba(58,42,28,.45); }
+  .calc-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--line); }
+  .calc-row:first-of-type{ padding-top:.3rem; }
+  .cr-info b{ font-family:var(--serif); font-weight:400; font-size:1.12rem; display:block; }
+  .cr-info span{ font-size:.78rem; color:var(--maro-faint); }
+  .stepper{ display:flex; align-items:center; gap:.2rem; flex:none; }
+  .stepper button{ width:32px; height:32px; border:1px solid var(--line-2); background:var(--crema); color:var(--maro); border-radius:8px; cursor:pointer; font-size:1.1rem; line-height:1; font-family:var(--sans); transition:all .18s; display:flex; align-items:center; justify-content:center; }
+  .stepper button:hover{ border-color:var(--auriu); color:var(--auriu-dk); }
+  .stepper .qty{ min-width:64px; text-align:center; font-size:.92rem; }
+  .stepper .qty b{ font-family:var(--serif); font-size:1.15rem; font-weight:400; }
+  .stepper .qty small{ display:block; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--maro-faint); }
+  .calc-total{ display:flex; align-items:baseline; justify-content:space-between; margin-top:1.4rem; padding-top:1.2rem; border-top:2px solid var(--maro); }
+  .calc-total .lbl{ font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--maro-soft); }
+  .calc-total .amt{ font-family:var(--serif); font-size:2.4rem; color:var(--auriu-dk); }
+  .calc-total .amt.bump{ animation:bump .3s var(--ease); }
+  @keyframes bump{ 0%{transform:scale(1);} 40%{transform:scale(1.12);} 100%{transform:scale(1);} }
+
+  .order-form{ background:linear-gradient(180deg, rgba(110,90,147,.06), transparent); border:1px solid var(--line); border-radius:10px; padding:1.8rem; }
+  .order-form h3{ font-size:1.5rem; margin-bottom:.2rem; }
+  .order-form .fsub{ font-size:.85rem; color:var(--maro-soft); margin-bottom:1.4rem; }
+  .fg{ margin-bottom:1rem; }
+  .fg label{ display:block; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--maro-soft); margin-bottom:5px; }
+  .fg input, .fg select{
+    width:100%; padding:.75rem .9rem; background:var(--crema); border:1px solid var(--line-2); border-radius:8px;
+    color:var(--maro); font-family:var(--sans); font-size:.95rem; font-weight:300; outline:none; transition:border-color .2s; -webkit-appearance:none;
+  }
+  .fg input:focus, .fg select:focus{ border-color:var(--auriu); }
+  .fg-row{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  .order-submit{ width:100%; padding:.95rem; background:var(--maro); color:var(--crema); border:none; border-radius:8px; font-family:var(--sans); font-size:.8rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:background .25s; margin-top:.4rem; }
+  .order-submit:hover{ background:var(--auriu-dk); }
+  .order-ok{ display:none; margin-top:1rem; padding:.9rem 1rem; border:1px solid var(--ok); background:rgba(78,122,78,.08); color:var(--ok); border-radius:8px; font-size:.86rem; text-align:center; }
+
+  /* ---------- visit / map ---------- */
+  .visit-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(2rem,5vw,4rem); align-items:stretch; }
+  .status{ display:inline-flex; align-items:center; gap:.5rem; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--maro-soft); margin-bottom:1.4rem; }
+  .status .dot{ width:9px; height:9px; border-radius:50%; background:var(--maro-faint); }
+  .status .dot.open{ background:var(--ok); box-shadow:0 0 10px rgba(78,122,78,.7); }
+  .hours-list{ list-style:none; border-top:1px solid var(--line); margin-top:.4rem; }
+  .hours-list li{ display:flex; justify-content:space-between; align-items:baseline; padding:.6rem .1rem; border-bottom:1px solid var(--line); font-size:.98rem; }
+  .hours-list li .d{ font-family:var(--serif); font-size:1.12rem; }
+  .hours-list li .h{ font-size:.86rem; color:var(--maro-soft); }
+  .hours-list li.today{ padding-left:.6rem; border-left:2px solid var(--auriu); background:linear-gradient(90deg, rgba(201,138,59,.1), transparent); }
+  .hours-list li.today .d{ color:var(--auriu-dk); }
+  .contact-lines{ margin-top:1.8rem; display:flex; flex-direction:column; gap:.5rem; }
+  .contact-lines a, .contact-lines p{ display:flex; gap:.7rem; align-items:center; color:var(--maro-soft); font-size:.98rem; transition:color .2s; }
+  .contact-lines a:hover{ color:var(--auriu-dk); }
+  .contact-lines .ic{ color:var(--scortisoara); width:20px; text-align:center; flex:none; }
+
+  /* map panel — self-contained SVG, always renders */
+  .map{ position:relative; border:1px solid var(--line-2); border-radius:12px; overflow:hidden; min-height:400px; display:flex; flex-direction:column; background:#EFE3C8; box-shadow:0 24px 60px -34px rgba(58,42,28,.5); }
+  .map svg.streets{ position:absolute; inset:0; width:100%; height:100%; }
+  .pin{ position:absolute; left:47%; top:40%; transform:translate(-50%,-100%); z-index:2; }
+  .pin .drop{ width:26px; height:26px; border-radius:50% 50% 50% 0; background:var(--scortisoara); border:3px solid var(--maro); transform:rotate(-45deg); box-shadow:0 6px 14px rgba(58,42,28,.35); }
+  .pin .ring{ position:absolute; left:50%; top:100%; width:26px; height:10px; border-radius:50%; background:rgba(58,42,28,.22); transform:translate(-50%,-4px); animation:mpulse 2.4s var(--ease) infinite; }
+  @keyframes mpulse{ 0%,100%{ transform:translate(-50%,-4px) scale(1); opacity:.5; } 50%{ transform:translate(-50%,-4px) scale(1.6); opacity:.15; } }
+  .map-card{ position:relative; z-index:3; margin-top:auto; margin:auto 16px 16px; background:var(--card); border:1px solid var(--line-2); border-radius:12px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
+  .map-card .a{ font-weight:500; color:var(--maro); line-height:1.3; }
+  .map-card .a small{ display:block; font-weight:300; color:var(--maro-soft); font-size:.82rem; margin-top:2px; }
+  .nav-btns{ display:flex; gap:.4rem; flex-wrap:wrap; }
+  .nav-btn{ font-size:.68rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:.55rem .8rem; border-radius:100px; border:1px solid var(--line-2); color:var(--maro); transition:all .2s; white-space:nowrap; }
+  .nav-btn:hover{ border-color:var(--auriu); color:var(--auriu-dk); background:rgba(201,138,59,.06); }
+  .nav-btn.primary{ background:var(--maro); color:var(--crema); border-color:var(--maro); }
+  .nav-btn.primary:hover{ background:var(--auriu-dk); border-color:var(--auriu-dk); color:#fff; }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--maro); color:var(--aluat); padding:clamp(60px,9vh,110px) 0 3rem; text-align:center; }
+  footer .fseal{ width:64px; height:64px; border-radius:50%; margin:0 auto 1.4rem; background:radial-gradient(circle at 38% 34%, var(--auriu), var(--auriu-dk) 70%); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.8rem; color:var(--crema); }
+  footer h2{ color:var(--crema); font-size:clamp(2rem,6vw,3.4rem); }
+  footer .fline{ color:var(--aluat); opacity:.75; margin:.6rem auto 2rem; font-family:var(--script); font-style:italic; font-size:1.2rem; }
+  footer .fmeta{ display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; padding-top:2rem; margin-top:2rem; border-top:1px solid rgba(242,236,225,.18); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(242,236,225,.6); }
+  .credit{ margin-top:1.4rem; font-size:.7rem; letter-spacing:.1em; color:rgba(242,236,225,.4); }
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .story-grid, .order-grid, .visit-grid{ grid-template-columns:1fr; }
+    .story-visual{ aspect-ratio:16/10; order:-1; }
+    .map{ min-height:340px; }
+  }
+  @media(max-width:520px){
+    .fg-row{ grid-template-columns:1fr; }
+    .calc-total .amt{ font-size:2rem; }
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top" id="top">
+  <a class="brand" href="#top" aria-label="Patiseria Pelerinul">
+    <span class="brand-seal">P</span>
+    <span class="brand-txt"><b>Pelerinul</b><span>Patiserie · Iași · din 1999</span></span>
+  </a>
+  <a class="top-cta" href="tel:0720222090"><span class="lbl">Comenzi</span> 0720 222 090</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="embers"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">Patiserie &amp; cofetărie · Bd. Ștefan cel Mare 16</div>
+    <h1 class="display">Pelerinul</h1>
+    <p class="lede">Cald, proaspăt și făcut cu răbdare — <b>lângă Mitropolie, din 1999.</b></p>
+    <div class="oven-chip">
+      <span class="flame" aria-hidden="true"></span>
+      <span class="oc-txt"><small>Proaspăt din cuptor</small><b id="ovenNow">Plăcintă cu brânză, caldă acum</b></span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Coboară</span><div class="bar"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="strip" aria-hidden="true">
+  <div class="marquee">
+    <span><b>Prăjituri proaspete <i>✦</i> Specialități de post <i>✦</i> Cozonaci &amp; pască <i>✦</i> Torturi la comandă <i>✦</i> Colaci &amp; colivă <i>✦</i> Lângă Mitropolie <i>✦</i></b></span>
+    <span><b>Prăjituri proaspete <i>✦</i> Specialități de post <i>✦</i> Cozonaci &amp; pască <i>✦</i> Torturi la comandă <i>✦</i> Colaci &amp; colivă <i>✦</i> Lângă Mitropolie <i>✦</i></b></span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="band">
+  <div class="wrap story-grid">
+    <div class="story-copy">
+      <span class="eyebrow reveal">Povestea noastră</span>
+      <h2 class="reveal d1">O patiserie cu <em>rost</em>,<br>lângă Mitropolie.</h2>
+      <p class="reveal d1">Din iarna anului 1999, Pelerinul coace zi de zi pentru ieșeni, pentru pelerinii care trec pragul Mitropoliei și pentru oricine simte, de pe stradă, mirosul de aluat rumenit. Suntem un loc mic, cu doar câteva mese — dar cu vitrine pline.</p>
+      <p class="reveal d2">Ne mândrim mai ales cu <strong>specialitățile de post</strong>: prăjituri făcute după rețete de post, la fel de bune ca cele cu unt și frișcă. Iar de sărbători, cozonacii și pasca noastră ajung pe mesele multor familii din Iași.</p>
+      <p class="reveal d3">Fără scurtături: ingrediente alese, preparate în laboratorul propriu și scoase proaspete la vânzare. Atât.</p>
+      <div class="story-facts reveal d3">
+        <div class="f"><span class="k">Din</span><span class="v">1999</span></div>
+        <div class="f"><span class="k">Lângă</span><span class="v">Mitropolie</span></div>
+        <div class="f"><span class="k">Specialitate</span><span class="v">Produse de post</span></div>
+      </div>
+    </div>
+    <div class="story-visual reveal d1">
+      <svg class="wheat" viewBox="0 0 120 200" fill="none" stroke="rgba(58,42,28,.4)" stroke-width="1.4" aria-hidden="true">
+        <path d="M60 190 V60"/>
+        <g stroke-width="1.2">
+          <path d="M60 70 q-16 -8 -22 -22 q14 2 22 12"/><path d="M60 70 q16 -8 22 -22 q-14 2 -22 12"/>
+          <path d="M60 90 q-16 -8 -22 -22 q14 2 22 12"/><path d="M60 90 q16 -8 22 -22 q-14 2 -22 12"/>
+          <path d="M60 110 q-16 -8 -22 -22 q14 2 22 12"/><path d="M60 110 q16 -8 22 -22 q-14 2 -22 12"/>
+          <path d="M60 130 q-16 -8 -22 -22 q14 2 22 12"/><path d="M60 130 q16 -8 22 -22 q-14 2 -22 12"/>
+        </g>
+      </svg>
+      <span class="ph-tag">foto vitrină / interior</span>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="band band-alt" id="meniu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Ce găsești la noi</span>
+      <h2>Din vitrină,<br><em>tot ce e cald</em>.</h2>
+      <p>Proaspete zilnic, împărțite simplu. Prețurile de mai jos sunt orientative* — se confirmă la magazin, fiindcă multe produse se vând la gramaj.</p>
+    </div>
+
+    <div class="menu-tabs reveal d1">
+      <button class="menu-tab active" data-cat="prajituri">Prăjituri</button>
+      <button class="menu-tab" data-cat="post">De post</button>
+      <button class="menu-tab" data-cat="torturi">Torturi &amp; ocazii</button>
+      <button class="menu-tab" data-cat="sarbatori">Sărbători</button>
+    </div>
+
+    <!-- PRĂJITURI -->
+    <div class="menu-cat active" id="prajituri">
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🍰</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Regina Maria</div><div class="p-price">la gramaj*</div></div><p class="p-desc">Prăjitura clasică a casei, cu blat fin și cremă — una dintre cele mai cerute.</p><span class="p-tag">Clasic</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🥕</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Prăjitură cu morcov</div><div class="p-price">la gramaj*</div></div><p class="p-desc">Blat umed cu morcov și scorțișoară, glazură fină — „ca la mama acasă".</p></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">☕</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Prăjitură cu unt și ness</div><div class="p-price">la gramaj*</div></div><p class="p-desc">Cremă de unt aromată cu cafea, pe blat pufos.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🍓</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Cu lămâie și căpșuni</div><div class="p-price">≈ 40 lei/kg*</div></div><p class="p-desc">Proaspătă și acrișoară, cu fructe — se vinde la gramaj.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">👓</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">„Pereche de ochelari"</div><div class="p-price">≈ 3,5 lei/buc*</div></div><p class="p-desc">Foietaj crocant plin cu fructe proaspete — micul răsfăț de stradă.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🧁</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Savarină</div><div class="p-price">la bucată*</div></div><p class="p-desc">Însiropată, cu frișcă — un clasic pe care clienții îl laudă des.</p></div>
+      </div>
+    </div>
+
+    <!-- DE POST -->
+    <div class="menu-cat" id="post">
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🌿</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Prăjituri de post</div><div class="p-price">la gramaj*</div></div><p class="p-desc">Specialitatea casei: deserturi de post făcute cu grijă, la fel de bune ca cele cu lactate. Vitrina de post e mereu plină.</p><span class="p-tag post">De post</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🥧</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Foietaje &amp; plăcinte de post</div><div class="p-price">la bucată*</div></div><p class="p-desc">Aluat crocant, umpluturi de sezon — potrivite pentru zilele de post.</p><span class="p-tag post">De post</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🍎</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Deserturi cu fructe</div><div class="p-price">la gramaj*</div></div><p class="p-desc">Fructe proaspete peste blaturi de post — ușoare și aromate.</p><span class="p-tag post">De post</span></div>
+      </div>
+    </div>
+
+    <!-- TORTURI -->
+    <div class="menu-cat" id="torturi">
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🎂</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Torturi personalizate</div><div class="p-price">la comandă</div></div><p class="p-desc">Pentru aniversări, nunți și botezuri — inclusiv variante de post. Se comandă din timp.</p><span class="p-tag">La comandă</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">💍</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Torturi de nuntă &amp; botez</div><div class="p-price">la comandă</div></div><p class="p-desc">Discutăm forma, blaturile și crema, iar noi le facem exact pentru ziua ta.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🕯️</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Colaci, colăcei &amp; colivă</div><div class="p-price">la comandă</div></div><p class="p-desc">Pregătite cu respect pentru pomeniri și momente de rânduială.</p></div>
+      </div>
+    </div>
+
+    <!-- SĂRBĂTORI -->
+    <div class="menu-cat" id="sarbatori">
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🍞</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Cozonac cu nucă</div><div class="p-price">≈ 40 lei/kg*</div></div><p class="p-desc">De frupt, cu nucă — și variante cu nucă și stafide, sau nucă, stafide și rahat.</p><span class="p-tag">Sărbători</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">🧀</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Pască cu brânză</div><div class="p-price">≈ 35 lei/kg*</div></div><p class="p-desc">Cu brânză și stafide, coaptă pentru masa de Paști.</p><span class="p-tag">Sărbători</span></div>
+      </div>
+      <div class="p-card">
+        <div class="ph-slot"><span class="glyph">✝️</span><span class="ph">foto</span></div>
+        <div class="p-body"><div class="p-top"><div class="p-name">Comenzi de Paști &amp; Crăciun</div><div class="p-price">pre-comandă</div></div><p class="p-desc">Comandă din timp și ridici la data stabilită — fără coadă. Vezi mai jos.</p></div>
+      </div>
+    </div>
+
+    <p class="menu-note">* Prețuri orientative, de confirmat cu patiseria. Multe produse se vând la gramaj și diferă în funcție de sortiment.</p>
+  </div>
+</section>
+
+<!-- PRE-COMANDĂ SĂRBĂTORI -->
+<section class="band" id="comenzi">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:2.6rem;">
+      <span class="eyebrow">Comenzi de sărbători</span>
+      <h2>Pre-comandă cozonac &amp; <em>pască</em>.</h2>
+      <p>De Paști și de Crăciun se adună lume. Alege cantitățile, vezi totalul pe loc și lasă-ne o pre-comandă cu ridicare din magazin — scapi de coadă.</p>
+    </div>
+
+    <div class="order-grid">
+      <!-- calculator -->
+      <div class="calc reveal d1">
+        <div class="calc-row" data-price="40" data-unit="kg">
+          <div class="cr-info"><b>Cozonac cu nucă</b><span>≈ 40 lei/kg*</span></div>
+          <div class="stepper">
+            <button type="button" aria-label="Scade" onclick="stepItem(this,-0.5)">−</button>
+            <div class="qty"><b class="q">0</b><small>kg</small></div>
+            <button type="button" aria-label="Adaugă" onclick="stepItem(this,0.5)">+</button>
+          </div>
+        </div>
+        <div class="calc-row" data-price="40" data-unit="kg">
+          <div class="cr-info"><b>Cozonac nucă &amp; stafide</b><span>≈ 40 lei/kg*</span></div>
+          <div class="stepper">
+            <button type="button" aria-label="Scade" onclick="stepItem(this,-0.5)">−</button>
+            <div class="qty"><b class="q">0</b><small>kg</small></div>
+            <button type="button" aria-label="Adaugă" onclick="stepItem(this,0.5)">+</button>
+          </div>
+        </div>
+        <div class="calc-row" data-price="35" data-unit="kg">
+          <div class="cr-info"><b>Pască cu brânză</b><span>≈ 35 lei/kg*</span></div>
+          <div class="stepper">
+            <button type="button" aria-label="Scade" onclick="stepItem(this,-0.5)">−</button>
+            <div class="qty"><b class="q">0</b><small>kg</small></div>
+            <button type="button" aria-label="Adaugă" onclick="stepItem(this,0.5)">+</button>
+          </div>
+        </div>
+        <div class="calc-row" data-price="0" data-unit="buc">
+          <div class="cr-info"><b>Colaci / colivă</b><span>preț la comandă*</span></div>
+          <div class="stepper">
+            <button type="button" aria-label="Scade" onclick="stepItem(this,-1)">−</button>
+            <div class="qty"><b class="q">0</b><small>buc</small></div>
+            <button type="button" aria-label="Adaugă" onclick="stepItem(this,1)">+</button>
+          </div>
+        </div>
+        <div class="calc-total">
+          <span class="lbl">Total estimativ</span>
+          <span class="amt" id="calcTotal">0 lei</span>
+        </div>
+      </div>
+
+      <!-- form -->
+      <div class="order-form reveal d2">
+        <h3>Lasă pre-comanda</h3>
+        <p class="fsub">Te sunăm să confirmăm cantitățile și ora de ridicare.</p>
+        <div class="fg"><label>Nume</label><input type="text" id="o-name" placeholder="Numele tău" /></div>
+        <div class="fg"><label>Telefon</label><input type="tel" id="o-tel" placeholder="07XX XXX XXX" /></div>
+        <div class="fg-row">
+          <div class="fg"><label>Data ridicării</label><input type="date" id="o-date" /></div>
+          <div class="fg"><label>Ora</label>
+            <select id="o-time">
+              <option>09:00</option><option>10:00</option><option>11:00</option><option selected>12:00</option>
+              <option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
+              <option>17:00</option><option>18:00</option><option>19:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Mențiuni (opțional)</label><input type="text" id="o-msg" placeholder="ex. nucă multă, fără stafide..." /></div>
+        <button class="order-submit" type="button" onclick="submitOrder()">Trimite pre-comanda →</button>
+        <div class="order-ok" id="orderOk">✓ Pre-comanda a fost trimisă. Te sunăm în curând pentru confirmare!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIZITĂ / LOCALIZARE -->
+<section class="band band-alt" id="vizita">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="eyebrow">Vino la noi</span>
+      <h2 style="font-size:clamp(2rem,5vw,3.2rem); margin:.5rem 0 1.4rem;">În inima<br><em>Iașului</em>.</h2>
+      <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Program</span></div>
+      <ul class="hours-list" id="hoursList">
+        <li data-dow="1"><span class="d">Luni</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="2"><span class="d">Marți</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="3"><span class="d">Miercuri</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="4"><span class="d">Joi</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="5"><span class="d">Vineri</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="6"><span class="d">Sâmbătă</span><span class="h">08:00 – 20:00</span></li>
+        <li data-dow="0"><span class="d">Duminică</span><span class="h">12:00 – 20:00</span></li>
+      </ul>
+      <div class="contact-lines">
+        <p><span class="ic">◈</span> Bd. Ștefan cel Mare și Sfânt 16, Iași — lângă Librăria Doxologia</p>
+        <a href="tel:0720222090"><span class="ic">✆</span> 0720 222 090</a>
+        <a href="mailto:contact@cofetariapelerinul.ro"><span class="ic">✉</span> contact@cofetariapelerinul.ro</a>
+        <a href="https://www.facebook.com/cofetariapelerinul" target="_blank" rel="noopener"><span class="ic">◐</span> facebook.com/cofetariapelerinul</a>
+      </div>
+      <p class="menu-note">* Program orientativ — de confirmat cu patiseria.</p>
+    </div>
+
+    <!-- MAP -->
+    <div class="map reveal d1" role="img" aria-label="Hartă: Patiseria Pelerinul, Bd. Ștefan cel Mare 16, Iași">
+      <svg class="streets" viewBox="0 0 600 460" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="460" fill="#EFE3C8"/>
+        <circle cx="300" cy="150" r="70" fill="#DDEAD2"/>
+        <rect x="250" y="120" width="100" height="60" rx="4" fill="#D8C8A0" opacity=".6"/>
+        <g stroke="#FBF4E7" stroke-width="24" fill="none" stroke-linecap="round">
+          <path d="M-20 200 H620"/><path d="M300 -20 V480"/>
+          <path d="M40 60 L360 380"/><path d="M560 40 L200 440"/>
+        </g>
+        <g stroke="#E4D3AE" stroke-width="2" fill="none">
+          <path d="M-20 200 H620"/><path d="M300 -20 V480"/>
+          <path d="M40 60 L360 380"/><path d="M560 40 L200 440"/>
+        </g>
+        <g fill="#E2D3AF">
+          <rect x="40" y="40" width="150" height="90" rx="6"/>
+          <rect x="360" y="30" width="150" height="100" rx="6"/>
+          <rect x="380" y="240" width="150" height="120" rx="6"/>
+          <rect x="40" y="250" width="120" height="110" rx="6"/>
+        </g>
+        <text x="312" y="150" font-family="Marcellus, serif" font-size="13" fill="#8A7250">Mitropolia</text>
+      </svg>
+      <div class="pin" aria-hidden="true"><div class="drop"></div><div class="ring"></div></div>
+      <div class="map-card">
+        <div class="a">Patiseria Pelerinul<small>Bd. Ștefan cel Mare 16 · lângă Doxologia</small></div>
+        <div class="nav-btns">
+          <a class="nav-btn primary" href="https://www.google.com/maps/search/?api=1&query=Cofetaria+Pelerinul+Bulevardul+Stefan+cel+Mare+16+Iasi" target="_blank" rel="noopener">Google Maps</a>
+          <a class="nav-btn" href="https://waze.com/ul?ll=47.1622104,27.5826582&navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <a class="nav-btn" href="https://maps.apple.com/?q=Patiseria+Pelerinul&ll=47.1622104,27.5826582" target="_blank" rel="noopener">Apple Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="fseal">P</div>
+    <h2>Te așteptăm la o <em>bunătate</em>.</h2>
+    <p class="fline">Cald, proaspăt, lângă Mitropolie — din 1999.</p>
+    <a class="top-cta" href="tel:0720222090" style="color:var(--aluat); border-color:rgba(242,236,225,.3);">✆ 0720 222 090</a>
+    <div class="fmeta">
+      <span>Bd. Ștefan cel Mare 16 · Iași</span>
+      <span>Luni–Sâmbătă 8–20 · Duminică 12–20*</span>
+      <span>facebook.com/cofetariapelerinul</span>
+    </div>
+    <div class="credit">Demo realizat de Tudor Ilisei · Site-uri pentru afaceri din Iași</div>
+  </div>
+</footer>
+
+<script>
+  /* ---- HEADER scroll ---- */
+  const header = document.getElementById('top');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* ---- REVEAL on scroll ---- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.16 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---- FRESH-FROM-OVEN rotating chip ---- */
+  const ovenItems = [
+    'Plăcintă cu brânză, caldă acum',
+    'Cozonac proaspăt scos din cuptor',
+    'Foietaje de post, calde',
+    'Prăjitura Regina Maria, gata la vitrină',
+    'Savarine proaspete cu frișcă',
+    'Colaci calzi, abia copți'
+  ];
+  let ovenIdx = 0;
+  const ovenEl = document.getElementById('ovenNow');
+  function rotateOven() {
+    ovenIdx = (ovenIdx + 1) % ovenItems.length;
+    ovenEl.style.opacity = '0';
+    setTimeout(() => { ovenEl.textContent = ovenItems[ovenIdx]; ovenEl.style.opacity = '1'; }, 400);
+  }
+  setInterval(rotateOven, 3200);
+
+  /* ---- MENU tabs ---- */
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.cat).classList.add('active');
+    });
+  });
+
+  /* ---- PRE-ORDER calculator ---- */
+  function stepItem(btn, delta) {
+    const row = btn.closest('.calc-row');
+    const qEl = row.querySelector('.q');
+    let val = parseFloat(qEl.textContent) || 0;
+    val = Math.max(0, Math.round((val + delta) * 10) / 10);
+    qEl.textContent = Number.isInteger(val) ? val : val.toFixed(1);
+    recalcTotal();
+  }
+  function recalcTotal() {
+    let total = 0;
+    document.querySelectorAll('.calc-row').forEach(row => {
+      const price = parseFloat(row.dataset.price) || 0;
+      const qty = parseFloat(row.querySelector('.q').textContent) || 0;
+      total += price * qty;
+    });
+    const amt = document.getElementById('calcTotal');
+    amt.textContent = (Math.round(total * 10) / 10).toString().replace('.', ',') + ' lei';
+    amt.classList.remove('bump'); void amt.offsetWidth; amt.classList.add('bump');
+  }
+
+  /* ---- ORDER form ---- */
+  function submitOrder() {
+    const name = document.getElementById('o-name').value.trim();
+    const tel = document.getElementById('o-tel').value.trim();
+    const date = document.getElementById('o-date').value;
+    if (!name || !tel || !date) {
+      alert('Te rog completează numele, telefonul și data ridicării.');
+      return;
+    }
+    document.getElementById('orderOk').style.display = 'block';
+    const btn = document.querySelector('.order-submit');
+    btn.disabled = true; btn.style.opacity = '0.55'; btn.textContent = 'Trimis ✓';
+  }
+  // set date min = today
+  (function () {
+    const d = new Date();
+    const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const el = document.getElementById('o-date');
+    if (el) el.min = iso;
+  })();
+
+  /* ---- LIVE open/closed status ---- */
+  (function () {
+    const now = new Date();
+    const dow = now.getDay();               // 0 = duminică
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const open = (dow === 0) ? 12 * 60 : 8 * 60;   // duminică 12:00, restul 08:00
+    const close = 20 * 60;                          // 20:00
+    const isOpen = mins >= open && mins < close;
+
+    const dot = document.getElementById('statusDot');
+    const txt = document.getElementById('statusText');
+    if (dot && txt) {
+      dot.classList.add(isOpen ? 'open' : 'closed');
+      txt.textContent = isOpen ? 'Deschis acum · până la 20:00' : 'Închis acum';
+    }
+    const li = document.querySelector('#hoursList li[data-dow="' + dow + '"]');
+    if (li) li.classList.add('today');
+  })();
+
+  /* ---- HERO ember/steam canvas (warm, subtle) ---- */
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canvas = document.getElementById('embers');
+    if (!canvas || reduce) return;
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0, parts = [];
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    function seed() {
+      parts = [];
+      const n = Math.min(46, Math.floor(W / 26));
+      for (let i = 0; i < n; i++) parts.push(newPart(true));
+    }
+    function newPart(init) {
+      return {
+        x: Math.random() * W,
+        y: init ? Math.random() * H : H + 10,
+        r: 1 + Math.random() * 2.4,
+        vy: 0.2 + Math.random() * 0.7,
+        vx: (Math.random() - 0.5) * 0.3,
+        a: 0.15 + Math.random() * 0.35,
+        ph: Math.random() * 6.28
+      };
+    }
+    let t = 0, running = true;
+    function tick() {
+      if (!running) return;
+      t += 0.01;
+      ctx.clearRect(0, 0, W, H);
+      for (const p of parts) {
+        p.y -= p.vy;
+        p.x += p.vx + Math.sin(t + p.ph) * 0.25;
+        if (p.y < -10) Object.assign(p, newPart(false));
+        if (!isFinite(p.x) || !isFinite(p.y)) continue;
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+        g.addColorStop(0, 'rgba(201,138,59,' + p.a + ')');
+        g.addColorStop(1, 'rgba(201,138,59,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, 6.283);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    resize(); seed(); tick();
+    window.addEventListener('resize', () => { resize(); seed(); });
+    document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) tick(); });
+  })();
+</script>
+</body>
+</html>
